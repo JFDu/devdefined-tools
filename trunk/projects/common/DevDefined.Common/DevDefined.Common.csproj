@@ -1,0 +1,105 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6B39450C-D9F3-4A54-9A05-4BBA38E0BF90}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevDefined.Common</RootNamespace>
+    <AssemblyName>DevDefined.Common</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\shared-libs\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dates\TimeSpanUtility.cs" />
+    <Compile Include="DelegateDefinitions.cs" />
+    <Compile Include="Dsl\AbstractNode.cs" />
+    <Compile Include="Dsl\Batch.cs" />
+    <Compile Include="Dsl\ComponentDsl.cs" />
+    <Compile Include="Dsl\ComponentEvaluationScope.cs" />
+    <Compile Include="Dsl\ComponentNode.cs" />
+    <Compile Include="Dsl\DslEvaluationScope.cs" />
+    <Compile Include="Dsl\DslExtensions.cs" />
+    <Compile Include="Dsl\DslToXml.cs" />
+    <Compile Include="Dsl\INode.cs" />
+    <Compile Include="Dsl\ItemNode.cs" />
+    <Compile Include="Dsl\NamedNode.cs" />
+    <Compile Include="Dsl\NodeWriter.cs" />
+    <Compile Include="Dsl\SectionNode.cs" />
+    <Compile Include="Dsl\StandardDsl.cs" />
+    <Compile Include="Dsl\TextNode.cs" />
+    <Compile Include="Extensions\Annotations\AnnotationStore.cs" />
+    <Compile Include="Extensions\Annotations\ClassAnnotation.cs" />
+    <Compile Include="Extensions\Annotations\IAnnotation.cs" />
+    <Compile Include="Extensions\Annotations\MemberAnnotation.cs" />
+    <Compile Include="Extensions\CommonExtensions.cs" />
+    <Compile Include="IO\Extensions.cs" />
+    <Compile Include="FileManager\DefaultFileManager.cs" />
+    <Compile Include="FileManager\IFileManager.cs" />
+    <Compile Include="FileManager\MimeTypeRegister.cs" />
+    <Compile Include="FileManager\WellKnownMimeTypes.cs" />
+    <Compile Include="Hash\Hasher.cs" />
+    <Compile Include="IO\NotifyingMemoryStream.cs" />
+    <Compile Include="IO\NotifyingStream.cs" />
+    <Compile Include="IO\VolatileByteArray.cs" />
+    <Compile Include="LocalDataImpl\ILocalData.cs" />
+    <Compile Include="LocalDataImpl\LocalData.cs" />
+    <Compile Include="Pipeline\Filter.cs" />
+    <Compile Include="Pipeline\GenericOperation.cs" />
+    <Compile Include="Pipeline\IOperation.cs" />
+    <Compile Include="Pipeline\Pipeline.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseDictionary.cs" />
+    <Compile Include="Compilation\Helpers.cs" />
+    <Compile Include="Compilation\SwitchCompiler.cs" />
+    <Compile Include="WeakRef\WeakDictionary.cs" />
+    <Compile Include="WeakRef\WeakKeyComparer_T.cs" />
+    <Compile Include="WeakRef\WeakKeyDictionary.cs" />
+    <Compile Include="WeakRef\WeakKeyReference_T.cs" />
+    <Compile Include="WeakRef\WeakNullReference_T.cs" />
+    <Compile Include="WeakRef\WeakReference_T.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
