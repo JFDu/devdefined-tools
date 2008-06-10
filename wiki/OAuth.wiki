@@ -15,7 +15,18 @@ The code can be found here:
 
 http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
 
-= Details =
+= Guides =
 
   * [OAuthConsumer] - implementing a consumer with the library.
   * [OAuthProvider] - implementing a provider with the library.
+
+= Issues =
+
+  * Cookie support for consumers incomplete.
+  * OAuth Authorization header support in provider incomplete.
+  * Poor test coverage.
+
+= Still to come =
+
+  * MonoRail provider example.
+  * WCF channel provider example.
