@@ -1,4 +1,5 @@
 #summary Details using the DevDefined OAuth library as a consumer.
+#labels OAuth,Consumer
 
 = Introduction =
 
