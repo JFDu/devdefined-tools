@@ -17,5 +17,5 @@ http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
 
 = Details =
 
-  * OAuthConsumer - implementing a consumer with the library.
-  * OAuthProvider - implementing a provider with the library.
+  * [OAuthConsumer] - implementing a consumer with the library.
+  * [OAuthProvider] - implementing a provider with the library.
