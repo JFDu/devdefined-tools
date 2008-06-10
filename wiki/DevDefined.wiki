@@ -4,6 +4,9 @@
 
 DevDefined Limited is a New Zealand based software development company.
 
-= Details =
-
 Additional details can be found at http://www.devdefined.com/
+
+= Projects =
+
+  * [Common] - Common code used in DevDefined projects and to accompany random blog posts.
+  * [OAuth] - An OAuth library for .Net - both consumer and provider implementations.
