@@ -3,12 +3,14 @@
 
 = Introduction =
 
-After looking at a few OAuth examples for .Net I was disheartened by their limited implementations, and especially a lack of a good provider implementation.  I started DevDefined.OAuth originally to accompany by REST presentation of the local .Net user group - but have decided to continue it's development for a while, in a hope that it might prove useful to others trying to implementing OAuth for .Net
+After looking at a few OAuth examples for .Net I was disheartened by their limited implementations, and especially a lack of a good provider implementation.  
+
+I started !DevDefined.OAuth originally to accompany my REST presentation for the local .Net user group in May - but have decided to continue it's development for a little while, in a hope that it might prove useful to others trying to implementing OAuth for .Net (and because I need it for an upcoming project).
 
 For more information on OAuth itself check out http://www.oauth.net/ and http://wiki.oauth.net/ or the google group at: http://groups.google.com/group/oauth/ 
 
 = Details =
 
-The code can be found here: 
+The code can be found here:
 
 http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
