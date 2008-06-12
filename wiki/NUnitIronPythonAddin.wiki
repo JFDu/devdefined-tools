@@ -1,7 +1,7 @@
 #summary Addins for NUnit 2.2 and 2.4 for testing IronPython code with compiled .Net assemblies.
 #labels IronPython,NUnit
 
-= Introduction =
+= Details =
 
 The code for the add-ins can be found here:
 
