@@ -10,4 +10,4 @@ Additional details can be found at http://www.devdefined.com/
 
   * [Common] - Common code used in DevDefined projects and to accompany random blog posts.
   * [OAuth] - An OAuth library for .Net - both consumer and provider implementations.
-  * [MvpWinformsMonorail] - A Winforms MVP framework targeting the .Net Framework 2.0 and taking advantage of the excellent Castle Windsor IoC container.
+  * [MvpWinforms] - A Winforms MVP framework targeting the .Net Framework 2.0 and taking advantage of the excellent Castle Windsor IoC container.
