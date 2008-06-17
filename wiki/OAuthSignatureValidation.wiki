@@ -1,4 +1,5 @@
 #summary A small example of how to validate a signed request.
+#labels OAuth,Signature,Validation
 
 = Introduction =
 
