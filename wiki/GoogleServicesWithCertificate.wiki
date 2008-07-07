@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary How to register and use an x509 certificate with google services.
 #labels Certificates,Featured
 
 = Introduction =
