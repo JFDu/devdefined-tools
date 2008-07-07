@@ -39,3 +39,7 @@ var consumerContext = new OAuthConsumerContext
     Key = certificate.PrivateKey
 };
 }}}
+
+See this article for more details:
+
+http://code.google.com/support/bin/answer.py?answer=71864&topic=12142
