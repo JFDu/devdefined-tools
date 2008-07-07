@@ -20,6 +20,7 @@ http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
   * [OAuthConsumer] - implementing a consumer with the library.
   * [OAuthProvider] - implementing a provider with the library.
   * [OAuthSignatureValidation] - how to use the library to validate a signature.
+  * [GoogleServicesWithCertificate] - how to use google services requiring a certificate.
 
 = Issues =
 
