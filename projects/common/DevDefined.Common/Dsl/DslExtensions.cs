@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DevDefined.Common.Extensions.Annotations;
 
 namespace DevDefined.Common.Dsl
@@ -10,7 +8,7 @@ namespace DevDefined.Common.Dsl
     {
         public static Batch[] ForEach<T>(this IEnumerable<T> source, Func<T, Batch> predicate)
         {
-            List<Batch> batches = new List<Batch>();
+            var batches = new List<Batch>();
 
             foreach (T item in source)
             {
@@ -27,7 +25,7 @@ namespace DevDefined.Common.Dsl
 
         public static bool IsIgnored(this Batch batch)
         {
-            return batch.HasAnnotation("Ignore");            
+            return batch.HasAnnotation("Ignore");
         }
     }
 }

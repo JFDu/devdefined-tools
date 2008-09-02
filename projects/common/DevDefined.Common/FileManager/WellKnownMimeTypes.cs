@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DevDefined.Common.FileManager
 {
@@ -11,18 +8,17 @@ namespace DevDefined.Common.FileManager
     /// </summary>
     public static class WellKnownMimeTypes
     {
-        public const string TextPlain = "text/plain";
-        public const string ImageJpeg = "image/jpeg";
-        public const string ImageBitmap = "image/bitmap";
-        public const string ImageGif = "image/gif";
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Png")]
-        public const string ImagePng = "image/png";
-        public const string Text = "text";
-        public const string Image = "image";
-        public const string Video = "video";
-        public const string Audio = "audio";
         public const string Application = "application";
         public const string ApplicationOctetStream = "application/octet-stream";
+        public const string Audio = "audio";
+        public const string Image = "image";
+        public const string ImageBitmap = "image/bitmap";
+        public const string ImageGif = "image/gif";
+        public const string ImageJpeg = "image/jpeg";
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Png")] public const string ImagePng = "image/png";
+        public const string Text = "text";
+        public const string TextPlain = "text/plain";
+        public const string Video = "video";
 
         public static bool IsApplication(string mimeType)
         {

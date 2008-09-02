@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace DevDefined.Common.WeakRef
 {
     /// <summary>
@@ -17,7 +12,9 @@ namespace DevDefined.Common.WeakRef
     {
         public static readonly WeakNullReference<T> Singleton = new WeakNullReference<T>();
 
-        private WeakNullReference() : base(null) { }
+        private WeakNullReference() : base(null)
+        {
+        }
 
         public override bool IsAlive
         {

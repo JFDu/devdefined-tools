@@ -1,7 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Win32;
 
 namespace DevDefined.Common.FileManager
@@ -31,7 +28,7 @@ namespace DevDefined.Common.FileManager
             extension = extension.Trim();
 
             RegistryKey key = Registry.ClassesRoot.OpenSubKey(extension);
-                        
+
             if (key != null)
             {
                 object value = key.GetValue(ContentTypeKey);
@@ -48,7 +45,7 @@ namespace DevDefined.Common.FileManager
         /// <returns></returns>
         public static List<string> GetExtensions(string mimeType)
         {
-            List<string> extensions = new List<string>();
+            var extensions = new List<string>();
 
             foreach (string className in Registry.ClassesRoot.GetSubKeyNames())
             {

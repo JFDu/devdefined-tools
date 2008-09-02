@@ -63,7 +63,7 @@ namespace DevDefined.Tools.Serialization
             byte b = 0;
             for (int i = 0; i < bits; i++)
             {
-                byte addition = (byte) (_bits.Dequeue() << i);
+                var addition = (byte) (_bits.Dequeue() << i);
                 b = (byte) (b | addition);
             }
 
@@ -90,7 +90,7 @@ namespace DevDefined.Tools.Serialization
 
         public byte[] ReadAllBytes(int bitSize)
         {
-            List<byte> bytes = new List<byte>();
+            var bytes = new List<byte>();
             while (CanRead(8))
             {
                 bytes.Add(Read(8));

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
 
 namespace DevDefined.Common.Dates
 {
     public class TimeSpanUtility
-    {        
+    {
         public static string MajorMinorDuration(TimeSpan span)
         {
             double delta = span.TotalSeconds;
@@ -18,20 +15,20 @@ namespace DevDefined.Common.Dates
             else if (delta < 2)
             {
                 return "1 second";
-            }              
+            }
             else if (delta < 60)
             {
                 return span.Seconds + " seconds";
             }
-            else if (delta < (60 * 60))
+            else if (delta < (60*60))
             {
                 return FormatMajorMinor("minute", span.Minutes, "second", span.Seconds);
             }
-            else if (delta < (60 * 60 * 24))
+            else if (delta < (60*60*24))
             {
                 return FormatMajorMinor("hour", span.Hours, "minute", span.Minutes);
             }
-            else if (delta < ( 60 * 60 * 24 * 7))
+            else if (delta < (60*60*24*7))
             {
                 return FormatMajorMinor("day", span.Days, "hour", span.Hours);
             }
@@ -45,7 +42,7 @@ namespace DevDefined.Common.Dates
         {
             if (major == 1)
             {
-                return major + " " + singularMajor + FormatMinor(singularMinor, minor);                
+                return major + " " + singularMajor + FormatMinor(singularMinor, minor);
             }
             else
             {
@@ -61,7 +58,7 @@ namespace DevDefined.Common.Dates
             }
             else if (value == 1)
             {
-                return  ", 1 " + singluar;
+                return ", 1 " + singluar;
             }
 
             return ", " + value + " " + singluar + "s";
@@ -83,20 +80,20 @@ namespace DevDefined.Common.Dates
             {
                 return "about a minute ago";
             }
-            else if (delta < (45 * 60))
+            else if (delta < (45*60))
             {
                 return span.Minutes + " minutes ago";
             }
-            else if (delta < (90 * 60))
+            else if (delta < (90*60))
             {
                 return "about an hour ago";
             }
-            else if (delta < (24 * 60 * 60))
+            else if (delta < (24*60*60))
             {
                 int hour = (span.Minutes > 45) ? span.Hours + 1 : span.Hours;
                 return "about " + hour + " hours ago";
             }
-            else if (delta < (48 * 60 * 60))
+            else if (delta < (48*60*60))
             {
                 return "1 day ago";
             }

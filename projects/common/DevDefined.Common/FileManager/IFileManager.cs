@@ -1,7 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace DevDefined.Common.FileManager
@@ -16,7 +12,7 @@ namespace DevDefined.Common.FileManager
         /// </summary>
         /// <param name="path"></param>
         void DeleteFile(string path);
-        
+
         /// <summary>
         /// Updates a file, given it's path (the file must already exist for this operation
         /// to succeed)

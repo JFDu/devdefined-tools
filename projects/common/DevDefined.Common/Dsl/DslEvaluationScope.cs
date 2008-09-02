@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Rhino.Commons;
+using System;
+using DevDefined.Common.LocalData;
 
 namespace DevDefined.Common.Dsl
 {
@@ -10,22 +7,19 @@ namespace DevDefined.Common.Dsl
     {
         private static string CurrentDslEvaluationScopeKey = "CurrentDslEvaluationScopeKey";
 
-        private DslEvaluationScope _previous;
-        private NodeWriter _nodeWriter;
+        private readonly NodeWriter _nodeWriter;
+        private readonly DslEvaluationScope _previous;
 
         public DslEvaluationScope(NodeWriter nodeWriter)
         {
             _nodeWriter = nodeWriter;
-            _previous = (DslEvaluationScope)Local.Data[CurrentDslEvaluationScopeKey];
+            _previous = (DslEvaluationScope) Local.Data[CurrentDslEvaluationScopeKey];
             Local.Data[CurrentDslEvaluationScopeKey] = this;
         }
 
         public static DslEvaluationScope Current
         {
-            get
-            {
-                return (DslEvaluationScope)Local.Data[CurrentDslEvaluationScopeKey];
-            }
+            get { return (DslEvaluationScope) Local.Data[CurrentDslEvaluationScopeKey]; }
         }
 
         public NodeWriter NodeWriter
@@ -33,10 +27,13 @@ namespace DevDefined.Common.Dsl
             get { return _nodeWriter; }
         }
 
+        #region IDisposable Members
+
         public void Dispose()
         {
             Local.Data[CurrentDslEvaluationScopeKey] = _previous;
         }
-    }
 
+        #endregion
+    }
 }

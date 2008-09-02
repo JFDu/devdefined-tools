@@ -10,14 +10,14 @@ namespace DevDefined.Tools.Text
 
         public static string ToString(IEnumerable<char> sourceCharacters)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             foreach (char ch in sourceCharacters) builder.Append(ch);
             return builder.ToString();
         }
 
         public static byte[] ToArray(IEnumerable<byte> sourceBytes)
         {
-            List<byte> buffer = new List<byte>();
+            var buffer = new List<byte>();
 
             foreach (byte sourceByte in sourceBytes)
             {
@@ -52,7 +52,7 @@ namespace DevDefined.Tools.Text
 
         public static IEnumerable<byte> PackBytes(IEnumerable<byte> sourceBytes, int bits)
         {
-            BitSink sink = new BitSink();
+            var sink = new BitSink();
 
             foreach (byte sourceByte in sourceBytes)
             {
@@ -74,7 +74,7 @@ namespace DevDefined.Tools.Text
 
         public static IEnumerable<byte> UnpackBytes(IEnumerable<byte> sourceBytes, int bits, bool discardRemainder)
         {
-            BitSink sink = new BitSink();
+            var sink = new BitSink();
 
             foreach (byte sourceByte in sourceBytes)
             {

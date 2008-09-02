@@ -31,10 +31,10 @@ namespace DevDefined.Tools.Serialization
         /// <returns></returns>
         public static Color DeserializeColor(string color)
         {
-            string[] pieces = color.Split(new char[] {':'});
+            string[] pieces = color.Split(new[] {':'});
 
-            ColorFormat colorType = (ColorFormat)
-                                    Enum.Parse(typeof (ColorFormat), pieces[0], true);
+            var colorType = (ColorFormat)
+                            Enum.Parse(typeof (ColorFormat), pieces[0], true);
 
             switch (colorType)
             {

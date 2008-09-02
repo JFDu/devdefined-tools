@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using Castle.Core.Logging;
 using DevDefined.Common.IO;
@@ -17,48 +17,20 @@ namespace DevDefined.Common.FileManager
         public DefaultFileManager(string path)
         {
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            _path = Path.GetFullPath(path);            
+            _path = Path.GetFullPath(path);
         }
 
         public ILogger Logger
         {
-            get 
+            get
             {
-                if (_logger == null)  _logger = NullLogger.Instance;
-                return _logger; 
+                if (_logger == null) _logger = NullLogger.Instance;
+                return _logger;
             }
-            set
-            {
-                _logger = value;
-            }
+            set { _logger = value; }
         }
 
-        private static void PreparePath(string absolutePath)
-        {
-            string directory = Path.GetDirectoryName(absolutePath);
-
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-        }
-
-        private string Absoloute(string relativePath)
-        {
-            if (Path.IsPathRooted(relativePath))
-            {
-                throw new ArgumentException(string.Format("path \"{0}\" is not relative", relativePath), "relativePath");
-            }
-
-            string absoloutePath = Path.GetFullPath(Path.Combine(_path, relativePath));
-
-            if (!absoloutePath.StartsWith(_path))
-            {
-                throw new ArgumentException(string.Format("path must be within the root path \"{0}\" of this file manager, but resolved to: \"{1}\"", _path, absoloutePath), "relativePath");
-            }
-
-            return absoloutePath;
-        }
+        #region IFileManager Members
 
         public void DeleteFile(string path)
         {
@@ -92,9 +64,9 @@ namespace DevDefined.Common.FileManager
             {
                 throw new ArgumentException(string.Format("file \"{0}\" exists, can not create", absoloutePath), "path");
             }
-         
+
             PreparePath(absoloutePath);
-         
+
             using (FileStream stream = File.Open(absoloutePath, FileMode.CreateNew, FileAccess.Write))
             {
                 contents.Pipe(stream);
@@ -120,6 +92,37 @@ namespace DevDefined.Common.FileManager
         public bool Exists(string path)
         {
             return File.Exists(Absoloute(path));
+        }
+
+        #endregion
+
+        private static void PreparePath(string absolutePath)
+        {
+            string directory = Path.GetDirectoryName(absolutePath);
+
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+        }
+
+        private string Absoloute(string relativePath)
+        {
+            if (Path.IsPathRooted(relativePath))
+            {
+                throw new ArgumentException(string.Format("path \"{0}\" is not relative", relativePath), "relativePath");
+            }
+
+            string absoloutePath = Path.GetFullPath(Path.Combine(_path, relativePath));
+
+            if (!absoloutePath.StartsWith(_path))
+            {
+                throw new ArgumentException(
+                    string.Format("path must be within the root path \"{0}\" of this file manager, but resolved to: \"{1}\"", _path, absoloutePath),
+                    "relativePath");
+            }
+
+            return absoloutePath;
         }
     }
 }

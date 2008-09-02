@@ -9,7 +9,7 @@ namespace DevDefined.Tools.Tests
         [Test]
         public void CancelEventArgs()
         {
-            CancelEventArgs args = new CancelEventArgs();
+            var args = new CancelEventArgs();
             Assert.IsFalse(args.Cancel);
 
             args.Cancel = true;
@@ -22,7 +22,7 @@ namespace DevDefined.Tools.Tests
         [Test]
         public void CancelEventArgsWithValue()
         {
-            CancelEventArgs<string> args = new CancelEventArgs<string>();
+            var args = new CancelEventArgs<string>();
             Assert.IsFalse(args.Cancel);
             Assert.IsNull(args.Value);
 
@@ -40,15 +40,15 @@ namespace DevDefined.Tools.Tests
         [ExpectedException(typeof (ApplicationException), "In the application's current environment you can not cancel this event")]
         public void CantCancelEventArgs()
         {
-            CantCancelEventArgs args = new CantCancelEventArgs();
+            var args = new CantCancelEventArgs();
             args.Cancel = true;
         }
 
         [Test]
-        [ExpectedException(typeof (ApplicationException),  "In the application's current environment you can not cancel this event")]
+        [ExpectedException(typeof (ApplicationException), "In the application's current environment you can not cancel this event")]
         public void CantCancelEventArgsWithValue()
         {
-            CantCancelEventArgs<string> args = new CantCancelEventArgs<string>("test");
+            var args = new CantCancelEventArgs<string>("test");
             Assert.AreEqual("test", args.Value);
             args.Cancel = true;
         }
@@ -56,7 +56,7 @@ namespace DevDefined.Tools.Tests
         [Test]
         public void SetCantCancelEventArgsToFalse()
         {
-            CantCancelEventArgs args = new CantCancelEventArgs();
+            var args = new CantCancelEventArgs();
             args.Cancel = false;
         }
     }

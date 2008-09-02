@@ -10,7 +10,7 @@ namespace DevDefined.Tools.Tests.Serialization
         [Test]
         public void Serialize()
         {
-            Padding padding = new Padding(10, 20, 30, 40);
+            var padding = new Padding(10, 20, 30, 40);
 
             string encodedValue = PaddingSerializer.SerializePadding(padding);
             Assert.AreEqual("10,20,30,40", encodedValue);

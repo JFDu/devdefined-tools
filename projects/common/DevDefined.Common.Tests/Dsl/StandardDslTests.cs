@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
 using DevDefined.Common.Dsl;
+using NUnit.Framework;
 
 namespace DevDefined.Common.Tests.Dsl
 {
@@ -11,25 +9,25 @@ namespace DevDefined.Common.Tests.Dsl
     public class StandardDslTests
     {
         [Test]
-        public void CreateSimpleDsl()
+        public void CreateDslWithForEach()
         {
+            var headers = new List<string> {"header1", "header2", "header3"};
+
+            var innerDsl = new StandardDsl();
+            innerDsl.Add(
+                headers.ForEach(text =>
+                                td => innerDsl.Text(text)
+                    )
+                );
+
             var dsl = new StandardDsl();
 
-            dsl.Add
-            (
-                table => dsl.As
-                (
-                    tr => dsl.As
-                    (
-                        td => dsl.Text("header1"),
-                        td => dsl.Text("header2")
-                    )
-                )
-            );
+            dsl.Add(
+                table => dsl.As(
+                             tr => dsl.As(innerDsl)));
 
-            string expected = @"<?xml version=""1.0"" encoding=""utf-16""?><table><tr><td>header1</td><td>header2</td></tr></table>";
 
-            Assert.AreEqual(expected, DslToXml.ToXml(dsl));
+            Console.WriteLine(DslToXml.ToXml(dsl));
         }
 
         [Test]
@@ -37,17 +35,17 @@ namespace DevDefined.Common.Tests.Dsl
         {
             var innerDsl = new StandardDsl();
             innerDsl.Add
-            (
+                (
                 innerDsl.Text("header1")
-            );
+                );
 
             var dsl = new StandardDsl();
 
             dsl.Add(
                 table => dsl.As(
-                    tr => dsl.As(
-                        td => innerDsl,
-                        td => dsl.Text("header2"))));
+                             tr => dsl.As(
+                                       td => innerDsl,
+                                       td => dsl.Text("header2"))));
 
             string expected = @"<?xml version=""1.0"" encoding=""utf-16""?><table><tr><td>header1</td><td>header2</td></tr></table>";
 
@@ -55,26 +53,25 @@ namespace DevDefined.Common.Tests.Dsl
         }
 
         [Test]
-        public void CreateDslWithForEach()
+        public void CreateSimpleDsl()
         {
-            List<string> headers = new List<string>() { "header1", "header2", "header3" };
-
-            var innerDsl = new StandardDsl();
-            innerDsl.Add (
-                headers.ForEach ( text =>
-                    td => innerDsl.Text(text)
-                )
-            );
-
             var dsl = new StandardDsl();
 
-            dsl.Add(
-                table => dsl.As(
-                    tr => dsl.As(innerDsl)));
+            dsl.Add
+                (
+                table => dsl.As
+                             (
+                             tr => dsl.As
+                                       (
+                                       td => dsl.Text("header1"),
+                                       td => dsl.Text("header2")
+                                       )
+                             )
+                );
 
+            string expected = @"<?xml version=""1.0"" encoding=""utf-16""?><table><tr><td>header1</td><td>header2</td></tr></table>";
 
-            Console.WriteLine(DslToXml.ToXml(dsl));
-        }        
+            Assert.AreEqual(expected, DslToXml.ToXml(dsl));
+        }
     }
 }
-

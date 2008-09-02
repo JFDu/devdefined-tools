@@ -8,16 +8,16 @@ namespace DevDefined.Tools.Win32
     /// </summary>
     public class User32
     {
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SetClipboardViewer(IntPtr hWnd);
 
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern bool ChangeClipboardChain(
             IntPtr hWndRemove, // handle to window to remove
             IntPtr hWndNewNext // handle to next window
             );
 
-        [DllImport("user32.dll", CharSet=CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
     }
 

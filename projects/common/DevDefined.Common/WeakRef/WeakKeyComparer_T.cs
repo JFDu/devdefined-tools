@@ -1,7 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DevDefined.Common.WeakRef
 {
@@ -17,8 +14,7 @@ namespace DevDefined.Common.WeakRef
     public sealed class WeakKeyComparer<T> : IEqualityComparer<object>
         where T : class
     {
-
-        private IEqualityComparer<T> comparer;
+        private readonly IEqualityComparer<T> comparer;
 
         public WeakKeyComparer(IEqualityComparer<T> comparer)
         {
@@ -28,11 +24,13 @@ namespace DevDefined.Common.WeakRef
             this.comparer = comparer;
         }
 
+        #region IEqualityComparer<object> Members
+
         public int GetHashCode(object obj)
         {
-            WeakKeyReference<T> weakKey = obj as WeakKeyReference<T>;
+            var weakKey = obj as WeakKeyReference<T>;
             if (weakKey != null) return weakKey.HashCode;
-            return this.comparer.GetHashCode((T)obj);
+            return comparer.GetHashCode((T) obj);
         }
 
         /// <summary>
@@ -70,12 +68,14 @@ namespace DevDefined.Common.WeakRef
             if (yIsDead)
                 return false;
 
-            return this.comparer.Equals(first, second);
+            return comparer.Equals(first, second);
         }
+
+        #endregion
 
         private static T GetTarget(object obj, out bool isDead)
         {
-            WeakKeyReference<T> wref = obj as WeakKeyReference<T>;
+            var wref = obj as WeakKeyReference<T>;
 
             T target;
 
@@ -86,11 +86,11 @@ namespace DevDefined.Common.WeakRef
             }
             else
             {
-                target = (T)obj;
+                target = (T) obj;
                 isDead = false;
             }
 
             return target;
         }
-    }    
+    }
 }

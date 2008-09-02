@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Xml;
-using System.Reflection;
-using System.Diagnostics;
-using System.Linq.Expressions;
-using DevDefined.Common.Extensions.Annotations;
-using Rhino.Commons;
 
 namespace DevDefined.Common.Dsl
 {
@@ -16,6 +7,11 @@ namespace DevDefined.Common.Dsl
     {
         private Batch[] _batches;
         private Object _executeLock = new Object();
+
+        protected NodeWriter NodeWriter
+        {
+            get { return DslEvaluationScope.Current.NodeWriter; }
+        }
 
         public void Execute()
         {
@@ -32,24 +28,27 @@ namespace DevDefined.Common.Dsl
 
         public Batch[] As(params Batch[] batches)
         {
-            Batch asBatch = new Batch(delegate(Batch ignore)
-            {
-                ExecuteBatches(batches);
-                return null;
-            });
+            Batch asBatch = delegate
+                                {
+                                    ExecuteBatches(batches);
+                                    return null;
+                                };
 
             asBatch.Ignore();
 
-            return new Batch[] { asBatch };
+            return new[] {asBatch};
         }
 
         public Batch[] Text(string value)
         {
-            return new Batch[] {delegate
-            {
-                NodeWriter.WriteNode(new TextNode(value));
-                return null;
-            }};
+            return new Batch[]
+                       {
+                           delegate
+                               {
+                                   NodeWriter.WriteNode(new TextNode(value));
+                                   return null;
+                               }
+                       };
         }
 
         protected void ExecuteBatches(Batch[] batches)
@@ -88,19 +87,11 @@ namespace DevDefined.Common.Dsl
 
         public static implicit operator Batch[](StandardDsl dsl)
         {
-            Batch batch = new Batch(delegate(Batch ignore)
-              {
-                  return dsl._batches;
-              });
+            Batch batch = delegate { return dsl._batches; };
 
             batch.Ignore();
 
-            return new Batch[] { batch };
+            return new[] {batch};
         }
-
-        protected NodeWriter NodeWriter
-        {
-            get { return DslEvaluationScope.Current.NodeWriter; }
-        }        
     }
 }

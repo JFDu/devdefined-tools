@@ -1,7 +1,6 @@
-﻿using System;
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 
 namespace DevDefined.Common
@@ -24,7 +23,7 @@ namespace DevDefined.Common
         private KeyCollection keys;
         private ValueCollection values;
 
-        protected BaseDictionary() { }
+        #region IDictionary<TKey,TValue> Members
 
         public abstract int Count { get; }
         public abstract void Clear();
@@ -33,7 +32,6 @@ namespace DevDefined.Common
         public abstract bool Remove(TKey key);
         public abstract bool TryGetValue(TKey key, out TValue value);
         public abstract IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator();
-        protected abstract void SetValue(TKey key, TValue value);
 
         public bool IsReadOnly
         {
@@ -44,10 +42,10 @@ namespace DevDefined.Common
         {
             get
             {
-                if (this.keys == null)
-                    this.keys = new KeyCollection(this);
+                if (keys == null)
+                    keys = new KeyCollection(this);
 
-                return this.keys;
+                return keys;
             }
         }
 
@@ -55,10 +53,10 @@ namespace DevDefined.Common
         {
             get
             {
-                if (this.values == null)
-                    this.values = new ValueCollection(this);
+                if (values == null)
+                    values = new ValueCollection(this);
 
-                return this.values;
+                return values;
             }
         }
 
@@ -67,26 +65,23 @@ namespace DevDefined.Common
             get
             {
                 TValue value;
-                if (!this.TryGetValue(key, out value))
+                if (!TryGetValue(key, out value))
                     throw new KeyNotFoundException();
 
                 return value;
             }
-            set
-            {
-                SetValue(key, value);
-            }
+            set { SetValue(key, value); }
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            this.Add(item.Key, item.Value);
+            Add(item.Key, item.Value);
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
             TValue value;
-            if (!this.TryGetValue(item.Key, out value))
+            if (!TryGetValue(item.Key, out value))
                 return false;
 
             return EqualityComparer<TValue>.Default.Equals(value, item.Value);
@@ -99,16 +94,37 @@ namespace DevDefined.Common
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            if (!this.Contains(item))
+            if (!Contains(item))
                 return false;
 
-            return this.Remove(item.Key);
+            return Remove(item.Key);
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
+
+        #endregion
+
+        protected abstract void SetValue(TKey key, TValue value);
+
+        private static void Copy<T>(ICollection<T> source, T[] array, int arrayIndex)
+        {
+            if (array == null)
+                throw new ArgumentNullException("array");
+
+            if (arrayIndex < 0 || arrayIndex > array.Length)
+                throw new ArgumentOutOfRangeException("arrayIndex");
+
+            if ((array.Length - arrayIndex) < source.Count)
+                throw new ArgumentException("Destination array is not large enough. Check array.Length and arrayIndex.");
+
+            foreach (T item in source)
+                array[arrayIndex++] = item;
+        }
+
+        #region Nested type: Collection
 
         private abstract class Collection<T> : ICollection<T>
         {
@@ -119,9 +135,11 @@ namespace DevDefined.Common
                 this.dictionary = dictionary;
             }
 
+            #region ICollection<T> Members
+
             public int Count
             {
-                get { return this.dictionary.Count; }
+                get { return dictionary.Count; }
             }
 
             public bool IsReadOnly
@@ -144,11 +162,9 @@ namespace DevDefined.Common
 
             public IEnumerator<T> GetEnumerator()
             {
-                foreach (KeyValuePair<TKey, TValue> pair in this.dictionary)
+                foreach (var pair in dictionary)
                     yield return GetItem(pair);
             }
-
-            protected abstract T GetItem(KeyValuePair<TKey, TValue> pair);
 
             public bool Remove(T item)
             {
@@ -165,35 +181,52 @@ namespace DevDefined.Common
                 throw new NotSupportedException("Collection is read-only.");
             }
 
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            IEnumerator IEnumerable.GetEnumerator()
             {
-                return this.GetEnumerator();
+                return GetEnumerator();
             }
+
+            #endregion
+
+            protected abstract T GetItem(KeyValuePair<TKey, TValue> pair);
         }
+
+        #endregion
+
+        #region Nested type: KeyCollection
 
         [DebuggerDisplay("Count = {Count}")]
         [DebuggerTypeProxy(PREFIX + "DictionaryKeyCollectionDebugView`2" + SUFFIX)]
         private class KeyCollection : Collection<TKey>
         {
             public KeyCollection(IDictionary<TKey, TValue> dictionary)
-                : base(dictionary) { }
+                : base(dictionary)
+            {
+            }
 
             protected override TKey GetItem(KeyValuePair<TKey, TValue> pair)
             {
                 return pair.Key;
             }
+
             public override bool Contains(TKey item)
             {
-                return this.dictionary.ContainsKey(item);
+                return dictionary.ContainsKey(item);
             }
         }
+
+        #endregion
+
+        #region Nested type: ValueCollection
 
         [DebuggerDisplay("Count = {Count}")]
         [DebuggerTypeProxy(PREFIX + "DictionaryValueCollectionDebugView`2" + SUFFIX)]
         private class ValueCollection : Collection<TValue>
         {
             public ValueCollection(IDictionary<TKey, TValue> dictionary)
-                : base(dictionary) { }
+                : base(dictionary)
+            {
+            }
 
             protected override TValue GetItem(KeyValuePair<TKey, TValue> pair)
             {
@@ -201,19 +234,6 @@ namespace DevDefined.Common
             }
         }
 
-        private static void Copy<T>(ICollection<T> source, T[] array, int arrayIndex)
-        {
-            if (array == null)
-                throw new ArgumentNullException("array");
-
-            if (arrayIndex < 0 || arrayIndex > array.Length)
-                throw new ArgumentOutOfRangeException("arrayIndex");
-
-            if ((array.Length - arrayIndex) < source.Count)
-                throw new ArgumentException("Destination array is not large enough. Check array.Length and arrayIndex.");
-
-            foreach (T item in source)
-                array[arrayIndex++] = item;
-        }
-    } 
+        #endregion
+    }
 }

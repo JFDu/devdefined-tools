@@ -231,7 +231,7 @@ namespace DevDefined.Tools.Text
             _atoms = new LikeAtom[matchExpressionLength];
             _atomsLength = 0;
 
-            ArrayList ranges = new ArrayList();
+            var ranges = new ArrayList();
 
             for (int matchExpCharIndex = 0; matchExpCharIndex < matchExpressionLength; matchExpCharIndex++)
             {
@@ -248,13 +248,13 @@ namespace DevDefined.Tools.Text
                         }
                         else
                         {
-                            ranges.Add(new char[] {currentChar, currentChar});
+                            ranges.Add(new[] {currentChar, currentChar});
                         }
                     }
                     else if (currentChar == ']')
                     {
                         // if "-" was the last character in the sequence, then it wasn't a range of characters...
-                        if (range) ranges.Add(new char[] {'-', '-'});
+                        if (range) ranges.Add(new[] {'-', '-'});
 
                         char[] matchCharacters;
                         char[][] matchRanges;
@@ -282,7 +282,7 @@ namespace DevDefined.Tools.Text
                         }
                         else
                         {
-                            ranges.Add(new char[] {'-', '-'});
+                            ranges.Add(new[] {'-', '-'});
                         }
                     }
                     else
@@ -299,14 +299,14 @@ namespace DevDefined.Tools.Text
                                 cStart = cEnd;
                                 cEnd = tempStart;
                             }
-                            ranges.Add(new char[] {cStart, cEnd});
+                            ranges.Add(new[] {cStart, cEnd});
 
                             // toggle range parsing off again
                             range = false;
                         }
                         else
                         {
-                            ranges.Add(new char[] {currentChar, currentChar});
+                            ranges.Add(new[] {currentChar, currentChar});
                         }
                     }
                 }
@@ -377,20 +377,20 @@ namespace DevDefined.Tools.Text
                 for (int j = 0; j < ranges.Count; j++)
                 {
                     if (i == j) continue;
-                    char[] charI = (char[]) ranges[i];
-                    char[] charJ = (char[]) ranges[j];
+                    var charI = (char[]) ranges[i];
+                    var charJ = (char[]) ranges[j];
                     if ((charJ[0] < charI[0]) && (charJ[1] >= (charI[0] - 1))) charI[0] = charJ[0];
                     if ((charJ[1] > charI[1]) && (charJ[0] <= (charI[1] + 1))) charI[1] = charJ[1];
                     ranges[i] = charI;
                 }
             }
 
-            ArrayList newRanges = new ArrayList(ranges.Count);
+            var newRanges = new ArrayList(ranges.Count);
             string newCharacters = string.Empty;
 
             for (int i = 0; i < ranges.Count; i++)
             {
-                char[] charI = (char[]) ranges[i];
+                var charI = (char[]) ranges[i];
                 if (charI[0] == charI[1])
                 {
                     if (newCharacters.IndexOf(charI[0]) < 0) newCharacters += charI[0];
@@ -400,7 +400,7 @@ namespace DevDefined.Tools.Text
                     bool exists = false;
                     for (int j = 0; j < newRanges.Count; j++)
                     {
-                        char[] charJ = (char[]) newRanges[j];
+                        var charJ = (char[]) newRanges[j];
                         if ((charI[0] == charJ[0]) && (charI[1] == charJ[0]))
                         {
                             exists = true;

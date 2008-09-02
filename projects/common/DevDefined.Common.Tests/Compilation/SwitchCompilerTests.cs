@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
 using DevDefined.Common.Compilation;
+using NUnit.Framework;
 
 namespace DevDefined.Common.Tests.Compilation
 {
@@ -13,19 +11,18 @@ namespace DevDefined.Common.Tests.Compilation
         [Test]
         public void SimpleTestFromJomoFishersSite()
         {
-            var dict = new Dictionary<string, int> {
+            var dict = new Dictionary<string, int>
+                           {
+                               {"happy", 9},
+                               {"sneezy", 2},
+                               {"doc", 7},
+                               {"sleepy", 8},
+                               {"dopey", 9},
+                               {"grumpy", 2},
+                               {"bashful", 6}
+                           };
 
-                    {"happy", 9}, {"sneezy", 2},
-
-                    {"doc", 7}, {"sleepy", 8},
-
-                    {"dopey", 9}, {"grumpy", 2},
-
-                    {"bashful", 6}
-
-                };
-
-            var Lookup = SwitchCompiler.CreateSwitch(dict);
+            Func<string, int> Lookup = SwitchCompiler.CreateSwitch(dict);
 
             Assert.AreEqual(7, Lookup("doc"));
         }

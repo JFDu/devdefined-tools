@@ -1,15 +1,41 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DevDefined.Common.Dsl
 {
     public class NodeWriter
     {
-        private List<INode> _rootNodes = new List<INode>();
+        private readonly List<INode> _rootNodes = new List<INode>();
         private INode _currentNode;
         private int _ignoreWriteEndCount;
+
+        public IEnumerable<INode> Nodes
+        {
+            get { return _rootNodes; }
+        }
+
+        public INode CurrentNode
+        {
+            get { return _currentNode; }
+        }
+
+        public string ExtractName
+        {
+            get
+            {
+                var namedNode = _currentNode as NamedNode;
+
+                if (namedNode != null)
+                {
+                    _ignoreWriteEndCount++;
+                    _currentNode = _currentNode.Parent;
+                    _currentNode.Nodes.Remove(namedNode);
+                    return namedNode.Name;
+                }
+
+                throw new InvalidOperationException("The CurrentNode is not of type NamedNode, and can not be popped to fetch the name");
+            }
+        }
 
         public NodeWriter WriteStartNode(INode node)
         {
@@ -46,43 +72,15 @@ namespace DevDefined.Common.Dsl
         {
             if (_ignoreWriteEndCount > 0)
             {
-                _ignoreWriteEndCount--;                
+                _ignoreWriteEndCount--;
             }
             else
-            {   
+            {
                 if (_currentNode == null) throw new InvalidOperationException("WriteEndNode called does not match any oustanding call to WriteStartNode");
-                _currentNode = _currentNode.Parent;                
+                _currentNode = _currentNode.Parent;
             }
 
             return this;
-        }
-
-        public IEnumerable<INode> Nodes
-        {
-            get { return _rootNodes; }
-        }
-
-        public INode CurrentNode
-        {
-            get { return _currentNode; }
-        }
-
-        public string ExtractName
-        {
-            get
-            {
-                NamedNode namedNode = _currentNode as NamedNode;
-
-                if (namedNode != null)
-                {
-                    _ignoreWriteEndCount++;
-                    _currentNode = _currentNode.Parent;
-                    _currentNode.Nodes.Remove(namedNode);                    
-                    return namedNode.Name;
-                }
-
-                throw new InvalidOperationException("The CurrentNode is not of type NamedNode, and can not be popped to fetch the name");
-            }
         }
     }
 }

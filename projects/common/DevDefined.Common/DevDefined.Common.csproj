@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\shared-libs\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\shared-libs\Castle.MicroKernel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -77,8 +81,9 @@
     <Compile Include="IO\NotifyingMemoryStream.cs" />
     <Compile Include="IO\NotifyingStream.cs" />
     <Compile Include="IO\VolatileByteArray.cs" />
-    <Compile Include="LocalDataImpl\ILocalData.cs" />
-    <Compile Include="LocalDataImpl\LocalData.cs" />
+    <Compile Include="LocalData\ILocalData.cs" />
+    <Compile Include="LocalData\LocalData.cs" />
+    <Compile Include="LocalData\PerLocalLifestyle.cs" />
     <Compile Include="Pipeline\Filter.cs" />
     <Compile Include="Pipeline\GenericOperation.cs" />
     <Compile Include="Pipeline\IOperation.cs" />

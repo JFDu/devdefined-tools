@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 
 namespace DevDefined.Common.IO
 {
@@ -34,20 +31,20 @@ namespace DevDefined.Common.IO
         {
         }
 
-        public VolatileByteArray(byte[] array) 
-        { 
-            _array = array; 
+        public VolatileByteArray(byte[] array)
+        {
+            _array = array;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         public byte[] Array
         {
-            get 
+            get
             {
                 AssertAccessible();
                 return _array;
             }
-            set 
+            set
             {
                 AssertAccessible();
                 _array = value;
@@ -57,7 +54,7 @@ namespace DevDefined.Common.IO
         public NotifyingMemoryStream AsReadableStream()
         {
             AssertReadable();
-            NotifyingMemoryStream stream = new NotifyingMemoryStream(_array);
+            var stream = new NotifyingMemoryStream(_array);
             stream.Closed += stream_Closed;
             _state = VolatileByteArrayState.Reading;
             return stream;
@@ -66,7 +63,7 @@ namespace DevDefined.Common.IO
         public NotifyingMemoryStream AsWritableStream()
         {
             AssertAccessible();
-            NotifyingMemoryStream stream = new NotifyingMemoryStream();
+            var stream = new NotifyingMemoryStream();
             stream.Closed += stream_Closed;
             _state = VolatileByteArrayState.Writing;
             return stream;
@@ -88,7 +85,7 @@ namespace DevDefined.Common.IO
                 _array = (sender as NotifyingMemoryStream).ToArray();
             _state = VolatileByteArrayState.Ok;
         }
-        
+
         protected void AssertAccessible()
         {
             if (_state != VolatileByteArrayState.Ok) throw new Exception("The byte array is being overwritten");

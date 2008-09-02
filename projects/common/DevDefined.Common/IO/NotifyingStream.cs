@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
 using System.IO;
 
 namespace DevDefined.Common.IO
@@ -9,11 +6,10 @@ namespace DevDefined.Common.IO
     public class NotifyingStream : Stream
     {
         private readonly Stream _innerStream;
-        public event EventHandler Closed;
 
         public NotifyingStream(Stream innerStream)
         {
-            if (innerStream == null) 
+            if (innerStream == null)
                 throw new ArgumentNullException("innerStream");
 
             _innerStream = innerStream;
@@ -21,7 +17,7 @@ namespace DevDefined.Common.IO
 
         public override bool CanRead
         {
-            get { return _innerStream.CanRead; }  
+            get { return _innerStream.CanRead; }
         }
 
         public override bool CanSeek
@@ -34,11 +30,6 @@ namespace DevDefined.Common.IO
             get { return _innerStream.CanWrite; }
         }
 
-        public override void Flush()
-        {
-            _innerStream.Flush();
-        }
-
         public override long Length
         {
             get { return _innerStream.Length; }
@@ -46,14 +37,20 @@ namespace DevDefined.Common.IO
 
         public override long Position
         {
-            get
-            {
-                return _innerStream.Position;
-            }
-            set
-            {
-                _innerStream.Position = value; 
-            }
+            get { return _innerStream.Position; }
+            set { _innerStream.Position = value; }
+        }
+
+        protected Stream InnerStream
+        {
+            get { return _innerStream; }
+        }
+
+        public event EventHandler Closed;
+
+        public override void Flush()
+        {
+            _innerStream.Flush();
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -93,11 +90,6 @@ namespace DevDefined.Common.IO
             {
                 _innerStream.Dispose();
             }
-        }
-
-        protected Stream InnerStream
-        {
-            get { return _innerStream; }
         }
     }
 }
