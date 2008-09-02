@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DevDefined.Common.WeakRef
 {
@@ -25,8 +23,8 @@ namespace DevDefined.Common.WeakRef
         where TKey : class
         where TValue : class
     {
-        private Dictionary<object, WeakReference<TValue>> dictionary;
-        private WeakKeyComparer<TKey> comparer;
+        private readonly WeakKeyComparer<TKey> comparer;
+        private readonly Dictionary<object, WeakReference<TValue>> dictionary;
 
         public WeakDictionary()
             : this(0, null)
@@ -46,9 +44,9 @@ namespace DevDefined.Common.WeakRef
         public WeakDictionary(int capacity, IEqualityComparer<TKey> comparer)
         {
             this.comparer = new WeakKeyComparer<TKey>(comparer);
-            this.dictionary = new Dictionary<object, WeakReference<TValue>>(capacity, this.comparer);
+            dictionary = new Dictionary<object, WeakReference<TValue>>(capacity, this.comparer);
         }
-        
+
         /// <summary>
         /// Returns the count of items in the dictionary.
         /// <remarks>
@@ -60,31 +58,31 @@ namespace DevDefined.Common.WeakRef
         /// </summary>
         public override int Count
         {
-            get { return this.dictionary.Count; }
+            get { return dictionary.Count; }
         }
 
         public override void Add(TKey key, TValue value)
         {
             if (key == null) throw new ArgumentNullException("key");
-            WeakReference<TKey> weakKey = new WeakKeyReference<TKey>(key, this.comparer);
+            WeakReference<TKey> weakKey = new WeakKeyReference<TKey>(key, comparer);
             WeakReference<TValue> weakValue = WeakReference<TValue>.Create(value);
-            this.dictionary.Add(weakKey, weakValue);
+            dictionary.Add(weakKey, weakValue);
         }
 
         public override bool ContainsKey(TKey key)
         {
-            return this.dictionary.ContainsKey(key);
+            return dictionary.ContainsKey(key);
         }
 
         public override bool Remove(TKey key)
         {
-            return this.dictionary.Remove(key);
+            return dictionary.Remove(key);
         }
 
         public override bool TryGetValue(TKey key, out TValue value)
         {
             WeakReference<TValue> weakValue;
-            if (this.dictionary.TryGetValue(key, out weakValue))
+            if (dictionary.TryGetValue(key, out weakValue))
             {
                 value = weakValue.Target;
                 return weakValue.IsAlive;
@@ -95,20 +93,20 @@ namespace DevDefined.Common.WeakRef
 
         protected override void SetValue(TKey key, TValue value)
         {
-            WeakReference<TKey> weakKey = new WeakKeyReference<TKey>(key, this.comparer);
-            this.dictionary[weakKey] = WeakReference<TValue>.Create(value);
+            WeakReference<TKey> weakKey = new WeakKeyReference<TKey>(key, comparer);
+            dictionary[weakKey] = WeakReference<TValue>.Create(value);
         }
 
         public override void Clear()
         {
-            this.dictionary.Clear();
+            dictionary.Clear();
         }
 
         public override IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            foreach (KeyValuePair<object, WeakReference<TValue>> kvp in this.dictionary)
+            foreach (var kvp in dictionary)
             {
-                WeakReference<TKey> weakKey = (WeakReference<TKey>)(kvp.Key);
+                var weakKey = (WeakReference<TKey>) (kvp.Key);
                 WeakReference<TValue> weakValue = kvp.Value;
                 TKey key = weakKey.Target;
                 TValue value = weakValue.Target;
@@ -116,7 +114,7 @@ namespace DevDefined.Common.WeakRef
                     yield return new KeyValuePair<TKey, TValue>(key, value);
             }
         }
-        
+
         /// <summary>
         /// Removes the left-over weak references for entries in the dictionary
         /// whose key or value has already been reclaimed by the garbage
@@ -126,9 +124,9 @@ namespace DevDefined.Common.WeakRef
         public void RemoveCollectedEntries()
         {
             List<object> toRemove = null;
-            foreach (KeyValuePair<object, WeakReference<TValue>> pair in this.dictionary)
+            foreach (var pair in dictionary)
             {
-                WeakReference<TKey> weakKey = (WeakReference<TKey>)(pair.Key);
+                var weakKey = (WeakReference<TKey>) (pair.Key);
                 WeakReference<TValue> weakValue = pair.Value;
 
                 if (!weakKey.IsAlive || !weakValue.IsAlive)
@@ -142,7 +140,7 @@ namespace DevDefined.Common.WeakRef
             if (toRemove != null)
             {
                 foreach (object key in toRemove)
-                    this.dictionary.Remove(key);
+                    dictionary.Remove(key);
             }
         }
     }

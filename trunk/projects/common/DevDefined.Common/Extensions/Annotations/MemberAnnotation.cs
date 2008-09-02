@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace DevDefined.Common.Extensions.Annotations
 {
     public class MemberAnnotation : IAnnotation
     {
-        private Dictionary<object, object> _propertyAnnotations = new Dictionary<object, object>();
         private readonly ClassAnnotation _classAnnotation;
         private readonly MemberInfo _member;
-        
-        public MemberInfo Member
-        {
-            get { return _member; }            
-        }
+        private readonly Dictionary<object, object> _propertyAnnotations = new Dictionary<object, object>();
 
         public MemberAnnotation(MemberInfo member, ClassAnnotation classAnnotation)
         {
@@ -23,21 +16,22 @@ namespace DevDefined.Common.Extensions.Annotations
             _classAnnotation = classAnnotation;
         }
 
+        public MemberInfo Member
+        {
+            get { return _member; }
+        }
+
         public ClassAnnotation ClassAnnotation
         {
             get { return _classAnnotation; }
         }
 
+        #region IAnnotation Members
+
         public object this[object key]
         {
-            get
-            {
-                return _propertyAnnotations[key];
-            }
-            set
-            {
-                _propertyAnnotations[key] = value;
-            }
+            get { return _propertyAnnotations[key]; }
+            set { _propertyAnnotations[key] = value; }
         }
 
         public void Clear()
@@ -62,6 +56,8 @@ namespace DevDefined.Common.Extensions.Annotations
                 _propertyAnnotations[func.Method.GetParameters()[0].Name] = func(null);
             }
         }
+
+        #endregion
 
         public bool HasKey(object key)
         {

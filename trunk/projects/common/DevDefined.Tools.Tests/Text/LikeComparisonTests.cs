@@ -9,7 +9,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestBackwardsCharSetRangeCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("[n-a]rg", true);
+            var comparison = new LikeComparison("[n-a]rg", true);
             Assert.IsTrue(comparison.Compare("arg"));
             Assert.IsTrue(comparison.Compare("brg"));
             Assert.IsTrue(comparison.Compare("frg"));
@@ -23,7 +23,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestBasicExpressionCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("TEST", true);
+            var comparison = new LikeComparison("TEST", true);
             Assert.IsTrue(comparison.Compare("TEST"));
             Assert.IsTrue(comparison.Compare("test"));
             Assert.IsTrue(comparison.Compare("TeSt"));
@@ -34,7 +34,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestBasicExpressionCaseSensitive()
         {
-            LikeComparison comparison = new LikeComparison("TEST", false);
+            var comparison = new LikeComparison("TEST", false);
             Assert.IsTrue(comparison.Compare("TEST"));
             Assert.IsFalse(comparison.Compare("test"));
             Assert.IsFalse(comparison.Compare("TeSt"));
@@ -45,7 +45,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestCharSetCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("[fbc]an", true);
+            var comparison = new LikeComparison("[fbc]an", true);
             Assert.IsTrue(comparison.Compare("fan"));
             Assert.IsTrue(comparison.Compare("ban"));
             Assert.IsTrue(comparison.Compare("can"));
@@ -60,7 +60,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestCharSetCaseSensitive()
         {
-            LikeComparison comparison = new LikeComparison("[fbc]an", false);
+            var comparison = new LikeComparison("[fbc]an", false);
             Assert.IsTrue(comparison.Compare("fan"));
             Assert.IsTrue(comparison.Compare("ban"));
             Assert.IsTrue(comparison.Compare("can"));
@@ -70,7 +70,7 @@ namespace DevDefined.Tools.Tests.Text
             Assert.IsFalse(comparison.Compare("FAIL"));
             Assert.IsFalse(comparison.Compare("zan"));
             Assert.IsFalse(comparison.Compare("canada"));
-            LikeComparison comparison2 = new LikeComparison("[fBc]an", false);
+            var comparison2 = new LikeComparison("[fBc]an", false);
             Assert.IsTrue(comparison2.Compare("Ban"));
             Assert.IsFalse(comparison2.Compare("ban"));
             Assert.IsTrue(comparison2.Compare("can"));
@@ -80,7 +80,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestCharSetRangeCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("[a-n]rg", true);
+            var comparison = new LikeComparison("[a-n]rg", true);
             Assert.IsTrue(comparison.Compare("arg"));
             Assert.IsTrue(comparison.Compare("brg"));
             Assert.IsTrue(comparison.Compare("frg"));
@@ -94,7 +94,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestCharSetRangesPlusSinglesCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("[acfn-pz-t]rg", true);
+            var comparison = new LikeComparison("[acfn-pz-t]rg", true);
             string passChars = "acfnoptuvwxyz";
             for (char c = 'a'; c <= 'z'; c++)
             {
@@ -117,7 +117,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestCharSetRangeStartAndEndsWithRangeMarkerCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("test[-z-]", true);
+            var comparison = new LikeComparison("test[-z-]", true);
             // it should pass for these scenarios (note that the range is counted
             // as a normal character, and so an allowable value in the set)
             Assert.IsTrue(comparison.Compare("test-"));
@@ -135,7 +135,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestClassicWildCardTermInStringCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("%sonic%", true);
+            var comparison = new LikeComparison("%sonic%", true);
             Assert.IsTrue(comparison.Compare("sonic youth"));
             Assert.IsTrue(comparison.Compare("when sonic youth arrive"));
             Assert.IsTrue(comparison.Compare("the hedgehogs name was sonic"));
@@ -148,7 +148,7 @@ namespace DevDefined.Tools.Tests.Text
         {
             // an expression we make more and more complex, to see if there's any issues with all
             // the expressions playing nicely together.	 Not a catch all so much as a sanity check			
-            LikeComparison comparison = new LikeComparison("a \\% b_[f-hi-k]", '\\', false);
+            var comparison = new LikeComparison("a \\% b_[f-hi-k]", '\\', false);
             Assert.IsTrue(comparison.Compare("a % big"));
             comparison = new LikeComparison("a \\% b_[f-hi-k]%_dog", '\\', false);
             Assert.IsTrue(comparison.Compare("a % big dog"));
@@ -174,7 +174,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestNotInCharSetRangesPlusSinglesCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("[^acfn-pz-t]rg", true);
+            var comparison = new LikeComparison("[^acfn-pz-t]rg", true);
             string failChars = "acfnoptuvwxyz";
             for (char c = 'a'; c <= 'z'; c++)
             {
@@ -202,7 +202,7 @@ namespace DevDefined.Tools.Tests.Text
             // the next atom for a match, as opposed to the whole of the remaining expression...
             // if you disable the normalising function in the LikeComparison class you should see
             // this test fail on the first comparison..
-            LikeComparison comparison = new LikeComparison("test%_end", true);
+            var comparison = new LikeComparison("test%_end", true);
             Assert.IsTrue(comparison.Compare("test_my_end"));
             // will fail here if you dont call LikeComparison.NormaliseWildCards from the Initialise function.
             Assert.IsTrue(comparison.Compare("test_end"));
@@ -215,7 +215,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestSingleCharacterWildCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("te_t", true);
+            var comparison = new LikeComparison("te_t", true);
             for (char c = 'a'; c <= 'z'; c++)
             {
                 // this is the only pass scenario we expect
@@ -230,7 +230,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestWildcardExpressionCaseInsensitive()
         {
-            LikeComparison comparison = new LikeComparison("TE%", true);
+            var comparison = new LikeComparison("TE%", true);
             Assert.IsTrue(comparison.Compare("TE"));
             Assert.IsTrue(comparison.Compare("TEST"));
             Assert.IsTrue(comparison.Compare("test"));
@@ -244,7 +244,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void TestWildcardExpressionCaseSensitive()
         {
-            LikeComparison comparison = new LikeComparison("TE%", false);
+            var comparison = new LikeComparison("TE%", false);
             Assert.IsTrue(comparison.Compare("TE"));
             Assert.IsTrue(comparison.Compare("TEST"));
             Assert.IsFalse(comparison.Compare("test"));
@@ -272,7 +272,7 @@ namespace DevDefined.Tools.Tests.Text
             //
             // returns 0 rows, so we now fail the last assertion to ensure the LikeComparison is compliant with the sql
             // expectations.
-            LikeComparison comparison = new LikeComparison("%", true);
+            var comparison = new LikeComparison("%", true);
             Assert.IsTrue(comparison.Compare(string.Empty));
             Assert.IsTrue(comparison.Compare("PASS"));
             Assert.IsTrue(comparison.Compare("%"));

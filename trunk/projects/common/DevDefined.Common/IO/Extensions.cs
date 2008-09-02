@@ -1,9 +1,7 @@
-﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace DevDefined.Common.IO
 {
@@ -21,7 +19,7 @@ namespace DevDefined.Common.IO
         /// <param name="closeOutput">should the outputstream be closed when done?</param>
         public static void Pipe(this Stream input, Stream output, bool closeInput, bool closeOutput)
         {
-            byte[] buf = new byte[1024];
+            var buf = new byte[1024];
             int c = 0;
             while ((c = input.Read(buf, 0, buf.Length)) > 0)
             {
@@ -39,21 +37,21 @@ namespace DevDefined.Common.IO
             Pipe(source, destination, true, true);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static IEnumerable<T> Enumerate<T>(this Stream input) where T : class
         {
             return Enumerate<T>(input, true);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static IEnumerable<T> Enumerate<T>(this Stream input, bool closeStream) where T : class
         {
             try
             {
-                BinaryFormatter bformatter = new BinaryFormatter();
+                var bformatter = new BinaryFormatter();
                 while (input.CanRead && (input.Position < input.Length))
                 {
-                    T t = bformatter.Deserialize(input) as T;
+                    var t = bformatter.Deserialize(input) as T;
                     if (t != null) yield return t;
                 }
             }
@@ -65,15 +63,15 @@ namespace DevDefined.Common.IO
 
         public static byte[] Serialize<T>(this IEnumerable<T> sequence) where T : class
         {
-            MemoryStream stream = new MemoryStream();
+            var stream = new MemoryStream();
             sequence.Flush(stream, true);
             return stream.ToArray();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static IEnumerable<T> Deserialize<T>(this byte[] serialized) where T : class
         {
-            MemoryStream stream = new MemoryStream(serialized);
+            var stream = new MemoryStream(serialized);
             return stream.Enumerate<T>(true);
         }
 
@@ -81,7 +79,7 @@ namespace DevDefined.Common.IO
         {
             try
             {
-                BinaryFormatter bformatter = new BinaryFormatter();
+                var bformatter = new BinaryFormatter();
                 foreach (T t in sequence)
                 {
                     bformatter.Serialize(output, t);
@@ -95,7 +93,7 @@ namespace DevDefined.Common.IO
 
         public static byte[] ReadToEndAsBytes(this Stream source)
         {
-            MemoryStream stream = new MemoryStream();
+            var stream = new MemoryStream();
 
             try
             {

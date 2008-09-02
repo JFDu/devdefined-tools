@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace DevDefined.Common.WeakRef
 {
     /// <summary>
@@ -20,7 +15,7 @@ namespace DevDefined.Common.WeakRef
             // retain the object's hash code immediately so that even
             // if the target is GC'ed we will be able to find and
             // remove the dead weak reference.
-            this.HashCode = comparer.GetHashCode(key);
+            HashCode = comparer.GetHashCode(key);
         }
     }
 }

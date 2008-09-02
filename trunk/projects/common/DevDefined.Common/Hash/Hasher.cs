@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DevDefined.Common.Hash
 {
@@ -10,7 +8,7 @@ namespace DevDefined.Common.Hash
         public static Dictionary<string, T> Hash<T>(params Func<string, T>[] args)
         {
             var dict = new Dictionary<string, T>();
-            AddToHash(dict, args);           
+            AddToHash(dict, args);
             return dict;
         }
 

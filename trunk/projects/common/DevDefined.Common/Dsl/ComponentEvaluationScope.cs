@@ -1,8 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Rhino.Commons;
+using DevDefined.Common.LocalData;
 
 namespace DevDefined.Common.Dsl
 {
@@ -10,23 +8,20 @@ namespace DevDefined.Common.Dsl
     {
         private static string CurrentComponentEvaluationScopeKey = "ComponentEvaluationScopeKey";
 
-        private ComponentEvaluationScope _previous;
-        private ComponentNode _componentNode;
-        private Dictionary<string, object> _viewParameters = new Dictionary<string, object>();
+        private readonly ComponentNode _componentNode;
+        private readonly ComponentEvaluationScope _previous;
+        private readonly Dictionary<string, object> _viewParameters = new Dictionary<string, object>();
 
         public ComponentEvaluationScope(ComponentNode componentNode)
         {
             _componentNode = componentNode;
-            _previous = (ComponentEvaluationScope)Local.Data[CurrentComponentEvaluationScopeKey];
+            _previous = (ComponentEvaluationScope) Local.Data[CurrentComponentEvaluationScopeKey];
             Local.Data[CurrentComponentEvaluationScopeKey] = this;
         }
 
         public static ComponentEvaluationScope Current
         {
-            get
-            {
-                return (ComponentEvaluationScope)Local.Data[CurrentComponentEvaluationScopeKey];
-            }
+            get { return (ComponentEvaluationScope) Local.Data[CurrentComponentEvaluationScopeKey]; }
         }
 
         public ComponentNode ComponentNode
@@ -39,10 +34,13 @@ namespace DevDefined.Common.Dsl
             get { return _viewParameters; }
         }
 
+        #region IDisposable Members
+
         public void Dispose()
         {
             Local.Data[CurrentComponentEvaluationScopeKey] = _previous;
         }
-    }
 
+        #endregion
+    }
 }

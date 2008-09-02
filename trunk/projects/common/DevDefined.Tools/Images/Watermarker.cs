@@ -54,7 +54,7 @@ namespace DevDefined.Tools.Images
             int phHeight = inputImage.Height;
 
             //create a Bitmap the Size of the original photograph
-            Bitmap bmPhoto = new Bitmap(phWidth, phHeight, PixelFormat.Format24bppRgb);
+            var bmPhoto = new Bitmap(phWidth, phHeight, PixelFormat.Format24bppRgb);
 
             bmPhoto.SetResolution(inputImage.HorizontalResolution, inputImage.VerticalResolution);
 
@@ -99,7 +99,7 @@ namespace DevDefined.Tools.Images
         public void DrawString(Graphics grPhoto, string text, Font font, int x, int y, Brush brush)
         {
             //Define the text layout by setting the text alignment to centered
-            StringFormat StrFormat = new StringFormat();
+            var StrFormat = new StringFormat();
             StrFormat.Alignment = StringAlignment.Near;
 
             //Draw the Copyright string

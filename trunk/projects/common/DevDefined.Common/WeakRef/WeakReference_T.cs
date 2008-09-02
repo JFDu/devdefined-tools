@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
 
 namespace DevDefined.Common.WeakRef
 {
@@ -15,12 +12,6 @@ namespace DevDefined.Common.WeakRef
     public class WeakReference<T> : WeakReference
         where T : class
     {
-        public static WeakReference<T> Create(T target)
-        {
-            if (target == null) return WeakNullReference<T>.Singleton;
-            return new WeakReference<T>(target);
-        }
-
         protected WeakReference(T target)
             : base(target, false)
         {
@@ -28,10 +19,13 @@ namespace DevDefined.Common.WeakRef
 
         public new T Target
         {
-            get
-            {
-                return (T)base.Target;
-            }
+            get { return (T) base.Target; }
+        }
+
+        public static WeakReference<T> Create(T target)
+        {
+            if (target == null) return WeakNullReference<T>.Singleton;
+            return new WeakReference<T>(target);
         }
     }
 }

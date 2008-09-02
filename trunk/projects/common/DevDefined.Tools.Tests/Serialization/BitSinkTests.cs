@@ -9,7 +9,7 @@ namespace DevDefined.Tools.Tests.Serialization
         [Test]
         public void AddBytesThenReadBytes()
         {
-            BitSink sink = new BitSink();
+            var sink = new BitSink();
             sink.AddByte(0xFF);
             sink.AddByte(0x00);
             sink.AddByte(0x0F);
@@ -26,7 +26,7 @@ namespace DevDefined.Tools.Tests.Serialization
         [Test]
         public void AddByteThenReadNibble()
         {
-            BitSink sink = new BitSink();
+            var sink = new BitSink();
             sink.AddByte(0xFE);
             Assert.IsTrue(sink.CanRead(4));
             Assert.AreEqual(0xE, sink.Read(4));
@@ -38,7 +38,7 @@ namespace DevDefined.Tools.Tests.Serialization
         [Test]
         public void AddNiblesThenReadByte()
         {
-            BitSink sink = new BitSink();
+            var sink = new BitSink();
             sink.AddBits(0xE, 4);
             sink.AddBits(0xF, 4);
             Assert.AreEqual(0xFE, sink.Read(8));

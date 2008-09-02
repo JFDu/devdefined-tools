@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
-using System.Collections;
 using DevDefined.Common.WeakRef;
 
 namespace DevDefined.Common.Extensions.Annotations
@@ -13,17 +10,40 @@ namespace DevDefined.Common.Extensions.Annotations
         private static readonly WeakDictionary<object, ClassAnnotation> _annotations
             = new WeakDictionary<object, ClassAnnotation>();
 
+        public static IEnumerable<ClassAnnotation> Classes
+        {
+            get
+            {
+                _annotations.RemoveCollectedEntries();
+                return _annotations.Values;
+            }
+        }
+
+        public static IEnumerable<MemberAnnotation> Members
+        {
+            get
+            {
+                foreach (ClassAnnotation classAnnotation in Classes)
+                {
+                    foreach (MemberAnnotation memberAnnotation in classAnnotation.Properties)
+                    {
+                        yield return memberAnnotation;
+                    }
+                }
+            }
+        }
+
         public static T Annotation<T>(this object target, object key)
         {
             ClassAnnotation annotation = GetOrCreateAnnotation(target);
-            return (T)annotation[key];
+            return (T) annotation[key];
         }
 
         public static T Annotation<T>(this object target, Expression<Funclet> expression, object key)
         {
             ClassAnnotation classAnnotation = GetOrCreateAnnotation(target);
             MemberAnnotation memberAnnotation = classAnnotation.ForMember(expression);
-            return (T)memberAnnotation[key];
+            return (T) memberAnnotation[key];
         }
 
         public static void ClearAnnotation(this object target, object key)
@@ -40,7 +60,7 @@ namespace DevDefined.Common.Extensions.Annotations
 
         public static ClassAnnotation Annotation(this object target)
         {
-            return GetOrCreateAnnotation(target);            
+            return GetOrCreateAnnotation(target);
         }
 
         public static void Annotate<T>(this object target, object key, T value)
@@ -72,30 +92,7 @@ namespace DevDefined.Common.Extensions.Annotations
         {
             ClassAnnotation annotation = GetAnnotation(target);
             if (annotation == null) return false;
-            return annotation.HasKey(name);        
-        }
-
-        public static IEnumerable<ClassAnnotation> Classes
-        {
-            get
-            {
-                _annotations.RemoveCollectedEntries();
-                return _annotations.Values;
-            }
-        }
-
-        public static IEnumerable<MemberAnnotation> Members
-        {
-            get
-            {
-                foreach (var classAnnotation in Classes)
-                {
-                    foreach (var memberAnnotation in classAnnotation.Properties)
-                    {
-                        yield return memberAnnotation;
-                    }
-                }
-            }
+            return annotation.HasKey(name);
         }
 
         private static ClassAnnotation GetOrCreateAnnotation(object key)

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using System.Collections.Generic;
 using DevDefined.Common.Extensions;
+using NUnit.Framework;
 
 namespace DevDefined.Common.Tests.Extensions
 {
@@ -13,21 +10,24 @@ namespace DevDefined.Common.Tests.Extensions
         [Test]
         public void LoopTo()
         {
-            10.LoopTo(20) (i => i.PrintLine());
+            10.LoopTo(20)(i => i.PrintLine());
         }
 
         [Test]
         public void ToProjectedDictionaryOfLists()
         {
-            var postTag = new[] {new { PostUrl="/blog/firstpost/", Tag=".Net"},
-                            new { PostUrl="/blog/firstpost/", Tag="Tools"},
-                            new { PostUrl="/blog/secondpost/", Tag="Travel"}};
+            var postTag = new[]
+                              {
+                                  new {PostUrl = "/blog/firstpost/", Tag = ".Net"},
+                                  new {PostUrl = "/blog/firstpost/", Tag = "Tools"},
+                                  new {PostUrl = "/blog/secondpost/", Tag = "Travel"}
+                              };
 
 
-            var organisedByTag = postTag.ToProjectedDictionaryOfLists
+            IDictionary<string, IList<string>> organisedByTag = postTag.ToProjectedDictionaryOfLists
                 (
-                    pt => pt.PostUrl,
-                    pt => pt.Tag
+                pt => pt.PostUrl,
+                pt => pt.Tag
                 );
 
             Assert.AreEqual(2, organisedByTag["/blog/firstpost/"].Count);

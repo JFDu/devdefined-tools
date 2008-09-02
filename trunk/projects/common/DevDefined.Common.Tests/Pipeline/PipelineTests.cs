@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using DevDefined.Common.Pipeline;
 using NUnit.Framework;
 
@@ -14,7 +12,7 @@ namespace DevDefined.Common.Tests.Pipeline
         [Test]
         public void AyendePipelineExample()
         {
-            TrivialProcessPipline pipeline = new TrivialProcessPipline();
+            var pipeline = new TrivialProcessPipline();
             pipeline.Execute();
         }
     }
@@ -31,35 +29,47 @@ namespace DevDefined.Common.Tests.Pipeline
 
     public class GetAllProcesses : IOperation<IEnumerable<Process>, object>
     {
+        #region IOperation<IEnumerable<Process>,object> Members
+
         public IEnumerable<Process> Execute(IEnumerable<Process> input, object context)
         {
             return Process.GetProcesses();
         }
+
+        #endregion
     }
 
     public class LimitByWorkingSetSize : IOperation<IEnumerable<Process>, object>
     {
+        #region IOperation<IEnumerable<Process>,object> Members
+
         public IEnumerable<Process> Execute(IEnumerable<Process> input, object context)
         {
-            int maxSizeBytes = 50 * 1024 * 1024;
+            int maxSizeBytes = 50*1024*1024;
             foreach (Process process in input)
             {
                 if (process.WorkingSet64 > maxSizeBytes)
                     yield return process;
             }
         }
+
+        #endregion
     }
 
     public class PrintProcessName : IOperation<IEnumerable<Process>, object>
     {
+        #region IOperation<IEnumerable<Process>,object> Members
+
         public IEnumerable<Process> Execute(IEnumerable<Process> input, object context)
         {
             foreach (Process process in input)
             {
-                System.Console.WriteLine(process.ProcessName);
+                Console.WriteLine(process.ProcessName);
             }
 
             return null;
         }
+
+        #endregion
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using Castle.Core.Logging;
 
 namespace DevDefined.Tools.UI
 {
@@ -60,6 +59,5 @@ namespace DevDefined.Tools.UI
 
             ThreadPool.QueueUserWorkItem(callback);
         }
-        
     }
 }

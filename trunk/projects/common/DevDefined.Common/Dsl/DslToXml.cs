@@ -1,9 +1,7 @@
-﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml;
-using System.Collections;
 
 namespace DevDefined.Common.Dsl
 {
@@ -11,7 +9,7 @@ namespace DevDefined.Common.Dsl
     {
         public static string ToXml(StandardDsl dsl)
         {
-            NodeWriter nodeWriter = new NodeWriter();
+            var nodeWriter = new NodeWriter();
 
             using (var scope = new DslEvaluationScope(nodeWriter))
             {
@@ -25,7 +23,7 @@ namespace DevDefined.Common.Dsl
         {
             var builder = new StringBuilder();
 
-            using (var writer = XmlWriter.Create(builder))
+            using (XmlWriter writer = XmlWriter.Create(builder))
             {
                 WriteXml(writer, nodeWriter.Nodes);
             }
@@ -39,19 +37,19 @@ namespace DevDefined.Common.Dsl
             {
                 if (node is NamedNode)
                 {
-                    writer.WriteStartElement(((NamedNode)node).Name);
+                    writer.WriteStartElement(((NamedNode) node).Name);
                     WriteXml(writer, node.Nodes);
                     writer.WriteEndElement();
                 }
                 else if (node is TextNode)
                 {
-                    writer.WriteString(((TextNode)node).Text);
+                    writer.WriteString(((TextNode) node).Text);
                 }
                 else if (node is ComponentNode)
                 {
                     writer.WriteStartElement("table");
 
-                    var componentNode = (ComponentNode)node;
+                    var componentNode = (ComponentNode) node;
 
                     using (new ComponentEvaluationScope(componentNode))
                     {
@@ -64,7 +62,7 @@ namespace DevDefined.Common.Dsl
                 else if (node is ItemNode)
                 {
                     object item = ComponentEvaluationScope.Current.ViewParameters["item"];
-                    ItemNode itemNode = (ItemNode)node;                    
+                    var itemNode = (ItemNode) node;
                     writer.WriteString(itemNode.Evaluate(item));
                 }
                 else
@@ -76,20 +74,20 @@ namespace DevDefined.Common.Dsl
 
         private static void WriteHeaderNode(XmlWriter writer, SectionNode section)
         {
-            WriteXml(writer, section.Nodes);            
+            WriteXml(writer, section.Nodes);
         }
 
         private static void WriteItems(XmlWriter writer, SectionNode section)
         {
             ComponentEvaluationScope scope = ComponentEvaluationScope.Current;
 
-            IEnumerable items = (IEnumerable)scope.ComponentNode.Parameters["source"];
+            var items = (IEnumerable) scope.ComponentNode.Parameters["source"];
 
             foreach (object item in items)
             {
                 scope.ViewParameters["item"] = item;
                 WriteXml(writer, section.Nodes);
             }
-        }        
+        }
     }
 }

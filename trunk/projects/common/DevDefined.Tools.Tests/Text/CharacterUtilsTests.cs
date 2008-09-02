@@ -25,7 +25,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void ConvertBytesToKey()
         {
-            byte[] bytes = new byte[16];
+            var bytes = new byte[16];
             for (int i = 0; i < 13; i++) bytes[i] = (byte) i;
             Assert.AreEqual("AKAX0-B0A50-BRAXX-BDYFY-AAAAA", ConvertBytesToKey(bytes));
         }
@@ -54,7 +54,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void UnpackAndPack3Bits()
         {
-            byte[] input = new byte[] {0xFF, 0xF, 0xCC, 3};
+            var input = new byte[] {0xFF, 0xF, 0xCC, 3};
             byte[] result = CharacterUtils.ToArray(CharacterUtils.PackBytes(CharacterUtils.UnpackBytes(input, 3), 3));
             Assert.AreEqual(input[0], result[0]);
             Assert.AreEqual(input[1], result[1]);
@@ -65,7 +65,7 @@ namespace DevDefined.Tools.Tests.Text
         [Test]
         public void UnpackAndPackBytes()
         {
-            byte[] input = new byte[] {0xFF, 0xF, 0xCC, 3};
+            var input = new byte[] {0xFF, 0xF, 0xCC, 3};
             byte[] result = CharacterUtils.ToArray(CharacterUtils.PackBytes(CharacterUtils.UnpackBytes(input, 8), 8));
             Assert.AreEqual(input[0], result[0]);
             Assert.AreEqual(input[1], result[1]);

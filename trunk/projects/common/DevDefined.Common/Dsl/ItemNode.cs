@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
 
 namespace DevDefined.Common.Dsl
 {
     public abstract class ItemNode : AbstractNode
     {
-        public ItemNode()
-        {
-        }
-
-        public abstract string Evaluate(object source); 
+        public abstract string Evaluate(object source);
     }
 
     public class ItemNode<T> : ItemNode
@@ -29,7 +22,7 @@ namespace DevDefined.Common.Dsl
 
         public override string Evaluate(object source)
         {
-            return Func((T)source);
+            return Func((T) source);
         }
     }
 }

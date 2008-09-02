@@ -22,8 +22,8 @@ namespace DevDefined.Tools.Serialization
         {
             if (!string.IsNullOrEmpty(encodedValue))
             {
-                int[] intValues = new int[4];
-                string[] values = encodedValue.Split(new char[] {PaddingSeperator});
+                var intValues = new int[4];
+                string[] values = encodedValue.Split(new[] {PaddingSeperator});
 
                 if (values.Length >= 4)
                 {
@@ -51,7 +51,7 @@ namespace DevDefined.Tools.Serialization
         /// <returns></returns>
         public static string SerializePadding(Padding padding)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             builder.Append(padding.Left);
             builder.Append(PaddingSeperator);
             builder.Append(padding.Top);

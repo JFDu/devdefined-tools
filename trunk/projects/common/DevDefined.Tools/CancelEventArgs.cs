@@ -7,8 +7,6 @@ namespace DevDefined.Tools
     /// </summary>
     public class CancelEventArgs : EventArgs
     {
-        private bool _cancel;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CancelEventArgs"/> class.
         /// </summary>
@@ -22,18 +20,14 @@ namespace DevDefined.Tools
         /// <param name="cancel">if set to <c>true</c> [cancel].</param>
         public CancelEventArgs(bool cancel)
         {
-            _cancel = cancel;
+            InternalCancel = cancel;
         }
 
         /// <summary>
         /// Gets or sets a value indicating whether the internal cancel flag is true or false.
         /// </summary>
         /// <value><c>true</c> if canceled; otherwise, <c>false</c>.</value>
-        protected bool InternalCancel
-        {
-            get { return _cancel; }
-            set { _cancel = value; }
-        }
+        protected bool InternalCancel { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="CancelEventArgs"/> is canceled.

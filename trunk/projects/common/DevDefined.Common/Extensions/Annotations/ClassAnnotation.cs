@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -9,15 +7,15 @@ namespace DevDefined.Common.Extensions.Annotations
 {
     public class ClassAnnotation : IAnnotation
     {
-        private Dictionary<object, object> _classAnnotations = new Dictionary<object, object>();
-        private Dictionary<MemberInfo, MemberAnnotation> _memberAnnotations = new Dictionary<MemberInfo, MemberAnnotation>();
-        private WeakReference _weakRefTarget;
+        private readonly Dictionary<object, object> _classAnnotations = new Dictionary<object, object>();
+        private readonly Dictionary<MemberInfo, MemberAnnotation> _memberAnnotations = new Dictionary<MemberInfo, MemberAnnotation>();
+        private readonly WeakReference _weakRefTarget;
 
         public ClassAnnotation(object target)
         {
             _weakRefTarget = new WeakReference(target);
         }
-        
+
         public string TargetTypeName
         {
             get { return TargetType.Name; }
@@ -33,16 +31,17 @@ namespace DevDefined.Common.Extensions.Annotations
             get { return _weakRefTarget.Target; }
         }
 
+        public IEnumerable<MemberAnnotation> Properties
+        {
+            get { return _memberAnnotations.Values; }
+        }
+
+        #region IAnnotation Members
+
         public object this[object key]
         {
-            get
-            {
-                return _classAnnotations[key];
-            }
-            set
-            {
-                _classAnnotations[key] = value;
-            }
+            get { return _classAnnotations[key]; }
+            set { _classAnnotations[key] = value; }
         }
 
         public void Clear()
@@ -61,12 +60,22 @@ namespace DevDefined.Common.Extensions.Annotations
             get { return _classAnnotations.Count; }
         }
 
+        public void Annotate<T>(params Func<string, T>[] args)
+        {
+            foreach (var func in args)
+            {
+                _classAnnotations[func.Method.GetParameters()[0].Name] = func(null);
+            }
+        }
+
+        #endregion
+
         private MemberInfo GetMemberKey(LambdaExpression expression)
         {
             MemberInfo info;
 
-            MemberExpression member = expression.Body as MemberExpression;
-            MethodCallExpression methodCall = expression.Body as MethodCallExpression;
+            var member = expression.Body as MemberExpression;
+            var methodCall = expression.Body as MethodCallExpression;
 
             if (member != null)
             {
@@ -90,7 +99,7 @@ namespace DevDefined.Common.Extensions.Annotations
         }
 
         public MemberAnnotation ForMember(LambdaExpression expression)
-        {            
+        {
             if (expression == null) throw new ArgumentException("expression");
 
             MemberInfo info = GetMemberKey(expression);
@@ -113,14 +122,6 @@ namespace DevDefined.Common.Extensions.Annotations
             return memberAnnotation;
         }
 
-        public void Annotate<T>(params Func<string, T>[] args)
-        {
-            foreach (var func in args)
-            {
-                _classAnnotations[func.Method.GetParameters()[0].Name] = func(null);
-            }
-        }
-
         public MemberAnnotation Annotate<T>(Expression<Funclet> memberExpression, params Func<string, T>[] args)
         {
             MemberAnnotation memberAnnotation = ForMember(memberExpression);
@@ -133,14 +134,6 @@ namespace DevDefined.Common.Extensions.Annotations
             MemberAnnotation memberAnnotation = ForMember(memberExpression);
             memberAnnotation.Annotate(args);
             return memberAnnotation;
-        }
-
-        public IEnumerable<MemberAnnotation> Properties
-        {
-            get
-            {
-                return _memberAnnotations.Values;
-            }
         }
 
         public bool HasKey(object key)

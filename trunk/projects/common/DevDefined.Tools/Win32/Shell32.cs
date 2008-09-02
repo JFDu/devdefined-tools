@@ -40,12 +40,12 @@ namespace DevDefined.Tools.Win32
             /// or the path and file name of the file that 
             /// contains the icon representing the file.
             /// </summary>
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=MAX_PATH)] public string szDisplayName;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_PATH)] public string szDisplayName;
 
             /// <summary>
             /// String that describes the type of file.
             /// </summary>
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=80)] public string szTypeName;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)] public string szTypeName;
         }
 
         #endregion

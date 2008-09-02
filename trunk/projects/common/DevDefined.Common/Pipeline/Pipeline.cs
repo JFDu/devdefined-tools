@@ -1,4 +1,3 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +10,29 @@ namespace DevDefined.Common.Pipeline
     /// <typeparam name="TContext"></typeparam>
     public class Pipeline<T, TContext> : IOperation<T, TContext>
     {
-        private List<IOperation<T, TContext>> _operations = new List<IOperation<T, TContext>>();
+        private readonly List<IOperation<T, TContext>> _operations = new List<IOperation<T, TContext>>();
+
+        #region IOperation<T,TContext> Members
+
+        public T Execute(T input, TContext context)
+        {
+            Filter<T, TContext> composedFilter = null;
+
+            foreach (var operation in _operations)
+            {
+                if (composedFilter == null) composedFilter = operation.Execute;
+                else
+                {
+                    IOperation<T, TContext> outerOperation = operation;
+                    Filter<T, TContext> oldFilter = composedFilter;
+                    composedFilter = (i, c) => outerOperation.Execute(oldFilter(i, c), c);
+                }
+            }
+
+            return composedFilter(input, context);
+        }
+
+        #endregion
 
         public void SetSource(T source)
         {
@@ -22,7 +43,8 @@ namespace DevDefined.Common.Pipeline
         {
             if (filters != null)
             {
-                var wrappedFilters = filters.Select<Filter<T, TContext>, IOperation<T, TContext>>(filter => new GenericOperation<T, TContext>(filter));
+                IEnumerable<IOperation<T, TContext>> wrappedFilters =
+                    filters.Select<Filter<T, TContext>, IOperation<T, TContext>>(filter => new GenericOperation<T, TContext>(filter));
                 _operations.AddRange(wrappedFilters);
             }
         }
@@ -32,28 +54,9 @@ namespace DevDefined.Common.Pipeline
             if (operations != null) _operations.AddRange(operations);
         }
 
-        public T Execute(T input, TContext context)
-        {
-            Filter<T, TContext> composedFilter = null;
-            
-            foreach (IOperation<T,TContext> operation in _operations)
-            {
-                
-                if (composedFilter == null) composedFilter = operation.Execute;                
-                else
-                {
-                    IOperation<T, TContext> outerOperation = operation;
-                    Filter<T, TContext> oldFilter = composedFilter;
-                    composedFilter = (i, c) => outerOperation.Execute(oldFilter(i, c), c);                    
-                }    
-            }
-
-            return composedFilter(input, context);            
-        }
-
         public void Execute(TContext context)
         {
-            Execute(default(T), context);            
+            Execute(default(T), context);
         }
 
         public void Execute()

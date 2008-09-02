@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
 using DevDefined.Common.Dsl;
+using NUnit.Framework;
 
 namespace DevDefined.Common.Tests.Dsl
 {
@@ -19,52 +17,52 @@ namespace DevDefined.Common.Tests.Dsl
 
             var people = new List<Person>
                              {
-                new Person { FirstName = "Alex", LastName = "Henderson"},
-                new Person { FirstName = "Joe", LastName = "Bloggs"}
-            };
+                                 new Person {FirstName = "Alex", LastName = "Henderson"},
+                                 new Person {FirstName = "Joe", LastName = "Bloggs"}
+                             };
 
             var compDsl = new ComponentDsl();
 
             compDsl.Add
-            (
-                GridComponent => compDsl.Component
                 (
-                    compDsl.Parameters
-                    (
-                        source => people
-                    ),
-                    header => compDsl.Section
-                    (
-                        tr => compDsl.As
-                        (
-                            th => compDsl.As
-                            (
-                                compDsl.Text("Names")
-                            )
-                        )
-                    ),
-                    item => compDsl.Section
-                    (
-                        tr => compDsl.As
-                        (
-                            td => compDsl.As
-                            (
-                                compDsl.Item<Person>(p => p.FirstName + " " + p.LastName)
-                            )
-                        )
-                    )
-                )
-            );
+                GridComponent => compDsl.Component
+                                     (
+                                     compDsl.Parameters
+                                         (
+                                         source => people
+                                         ),
+                                     header => compDsl.Section
+                                                   (
+                                                   tr => compDsl.As
+                                                             (
+                                                             th => compDsl.As
+                                                                       (
+                                                                       compDsl.Text("Names")
+                                                                       )
+                                                             )
+                                                   ),
+                                     item => compDsl.Section
+                                                 (
+                                                 tr => compDsl.As
+                                                           (
+                                                           td => compDsl.As
+                                                                     (
+                                                                     compDsl.Item<Person>(p => p.FirstName + " " + p.LastName)
+                                                                     )
+                                                           )
+                                                 )
+                                     )
+                );
 
             var dsl = new StandardDsl();
 
             dsl.Add
-            (
-                html => dsl.As
                 (
-                    body => compDsl
-                )
-            );
+                html => dsl.As
+                            (
+                            body => compDsl
+                            )
+                );
 
             Console.WriteLine(DslToXml.ToXml(dsl));
         }

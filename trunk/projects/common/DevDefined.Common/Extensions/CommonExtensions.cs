@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DevDefined.Common.Extensions
 {
@@ -9,7 +7,7 @@ namespace DevDefined.Common.Extensions
     {
         public static Action<Action<int>> LoopTo(this int start, int end)
         {
-            return new Action<Action<int>>(action => To(start, end).ForEach(i => action(i)));
+            return action => To(start, end).ForEach(i => action(i));
         }
 
         public static IEnumerable<int> To(this int start, int end)
@@ -19,7 +17,7 @@ namespace DevDefined.Common.Extensions
                     yield return i;
             else
                 for (int i = start; i < end + 1; i++)
-                    yield return i;   
+                    yield return i;
         }
 
         public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
@@ -32,17 +30,17 @@ namespace DevDefined.Common.Extensions
             Console.WriteLine(o);
         }
 
-        public static IDictionary<KeyType,IList<ProjectedType>> ToProjectedDictionaryOfLists<ItemType, KeyType, ProjectedType>
-        (
+        public static IDictionary<KeyType, IList<ProjectedType>> ToProjectedDictionaryOfLists<ItemType, KeyType, ProjectedType>
+            (
             this IEnumerable<ItemType> that,
             Func<ItemType, KeyType> keyFunc,
             Func<ItemType, ProjectedType> projectedItemFunc)
         {
             var dictionaryOfLists = new Dictionary<KeyType, IList<ProjectedType>>();
-            foreach (var item in that)
+            foreach (ItemType item in that)
             {
-                var key = keyFunc(item);
-                var projectedItem = projectedItemFunc(item);
+                KeyType key = keyFunc(item);
+                ProjectedType projectedItem = projectedItemFunc(item);
                 IList<ProjectedType> list;
                 if (dictionaryOfLists.TryGetValue(key, out list))
                 {
@@ -57,6 +55,6 @@ namespace DevDefined.Common.Extensions
             }
 
             return dictionaryOfLists;
-        }    
+        }
     }
 }

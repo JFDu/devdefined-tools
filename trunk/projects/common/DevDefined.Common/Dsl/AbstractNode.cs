@@ -1,7 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DevDefined.Common.Dsl
 {
@@ -9,8 +6,15 @@ namespace DevDefined.Common.Dsl
     {
         private readonly List<INode> _nodes = new List<INode>();
 
+        #region INode Members
+
         public INode Parent { get; set; }
 
-        public List<INode> Nodes { get { return _nodes; } }
+        public List<INode> Nodes
+        {
+            get { return _nodes; }
+        }
+
+        #endregion
     }
 }
