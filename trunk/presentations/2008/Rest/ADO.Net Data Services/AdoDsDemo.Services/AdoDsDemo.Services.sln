@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoDsDemo.Services", "AdoDsDemo.Services\AdoDsDemo.Services.csproj", "{060D6D9E-882E-43FC-8291-8A790AC1DAA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoDsDemo.FormsClient", "AdoDsDemo.FormsClient\AdoDsDemo.FormsClient.csproj", "{2BCA6612-7D80-4906-8857-E2527BA1B02B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{060D6D9E-882E-43FC-8291-8A790AC1DAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{060D6D9E-882E-43FC-8291-8A790AC1DAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{060D6D9E-882E-43FC-8291-8A790AC1DAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{060D6D9E-882E-43FC-8291-8A790AC1DAA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCA6612-7D80-4906-8857-E2527BA1B02B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCA6612-7D80-4906-8857-E2527BA1B02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCA6612-7D80-4906-8857-E2527BA1B02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCA6612-7D80-4906-8857-E2527BA1B02B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

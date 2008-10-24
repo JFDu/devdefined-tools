@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>RESTful MonoRail demo</title>
+		<link rel="stylesheet" href="$siteRoot/Content/css/default.css" type="text/css" media="screen" />
+  </head>
+<body>
+		<h1><em>REST</em>ful MonoRail Demo</h1>
+		
+$childContent	
+	
+	</body>
+</html>
