@@ -1,0 +1,4 @@
+﻿<div id="container">
+  <p>hello world</p>
+  <a href="/oauth/authenticate.rails">Authenticate!</a>
+</div>

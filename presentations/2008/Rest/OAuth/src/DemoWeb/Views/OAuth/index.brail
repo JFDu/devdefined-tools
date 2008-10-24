@@ -1,0 +1,21 @@
+﻿<html>
+<body>
+  <p>
+    MonoRail OAuth API Test Server</p>    
+  <h1>Examples</h1>
+  <ul>
+    <li><a href="${requestTokenUri}">Request Token</a> </li>
+    <li><a href="${exchangeRequestTokenForAccessTokenUri}">Exchange Request Token for Access
+      Token</a> </li>
+    <li><a href="/api/contacts">Acces contacts list - without signed uri</a> </li>
+    <li><a href="${accessProtectedResourceUri}">Access contacts list - with signed uri</a>
+    <li><a href="/api/contacts/1">Acces contacts list - without signed uri</a> </li>
+    <li><a href="${accessOneProtectedResourceUri}">Access single contact - with signed uri</a>
+    </li>
+  </ul>
+  <h2>Current Signature Method: ${signatureMethod}</h2>
+  Change method to: <a href="index.rails?signatureMethod=PLAINTEXT">PlainText</a>&nbsp;
+  <a href="index.rails?signatureMethod=HMAC-SHA1">HMAC-SHA1</a>&nbsp;
+  <a href="index.rails?signatureMethod=RSA-SHA1">RSA-SHA1</a>
+</body>
+</html>

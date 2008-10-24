@@ -1,0 +1,144 @@
+Package
+{
+  name="C# Model"
+  namespaceroot="true"
+  
+  Class
+  {
+    XRef{namespace="C#" name="Class" source="{907F0550-7055-4587-A854-44501F522673}"}
+	complexity="1"
+    status="Proposed"
+    phase="1.0"
+    author="Alex Henderson"
+    language="C#"
+	
+    Operation
+    {
+      XRef{namespace="C#" name="LinkedAttributeProperty" source="{907F0550-7055-4587-A854-44501F522673}"}
+      name="Activity"
+      stereotype="property"
+	  scope="Public"
+	  type="Activity"
+	  Tag{name="attribute_name" value="_activity"}
+	  Tag{name="Attribute" value="[BelongsTo(\"ActivityId\")]"}  
+	  Tag{name="virtual" value="true"}
+    }
+  }  
+}
+
+Action 
+ActionPin 
+Activity 
+ActivityParameter 
+ActivityPartition 
+ActivityRegion 
+Actor 
+Association 
+Change
+Class 
+Collaboration 
+CollaborationOccurrence 
+Component 
+DeploymentSpecification 
+DiagramFrame 
+Decision 
+EntryPoint 
+Event 
+ExitPoint 
+ExceptionHandler 
+ExpansionNode 
+ExpansionRegion 
+ExposedInterface 
+GUIElement 
+InteractionFragment 
+InteractionOccurrence 
+InteractionState 
+Interface 
+InterruptibleActivityRegion 
+Issue 
+Iteration 
+Object 
+ObjectNode 
+MessageEndpoint 
+Node 
+Package 
+Parameter 
+Part 
+Port 
+ProvidedInterface 
+RequiredInterface 
+Requirement 
+Sequence 
+State 
+StateNode 
+Synchronization 
+Table 
+TimeLine 
+UMLDiagram 
+UseCase
+
+
+Abstract 
+Alias 
+Arguments 
+Author 
+Cardinality 
+Classifier 
+Complexity 
+Concurrency 
+Filename 
+Header 
+Import 
+IsActive 
+IsLeaf 
+IsRoot 
+IsSpecification 
+Keyword 
+Language 
+Multiplicity 
+Name 
+Notes 
+Persistence 
+Phase 
+Scope 
+Status 
+Stereotype 
+Version 
+Visibility
+
+Attribute 
+Classifier 
+Parameter 
+Operation 
+Parent 
+Tag 
+XRef 
+
+%elemType%
+{
+	%TRANSFORM_REFERENCE("Class")%
+	%TRANSFORM_CURRENT("language", "name")%
+	name=%qt%$name%qt%
+	language="C#"
+	%list="ClassBase" @separator="\n" @indent="  "%
+	%list="ClassInterface" @separator="\n" @indent="  "%
+	%list="InnerClass" @separator="\n" @indent="  "%
+	%if elementType =="Class" and classStereotype == "picklist"%
+	%list="Attribute" @separator="\n" @indent="  " attStereotype != "enum"%
+	%else%	
+	%if elemType=="Class"%
+	%list="Attribute" @separator="\n" @indent="  "%
+	%endIf%
+	%endIf%
+	%list="Attribute__Property" @separator="\n" @indent="  " attScope=="Public" and attStereotype != "enum"%
+	%list="Operation" @separator="\n" @indent="  "%
+	%list="Connector__ReverseProperty" connectorDestElemGUID == classGUID%
+	%if elemType == "Class" and classStereotype != "enumeration"%		
+	Tag
+	{
+		name="partial"
+		value="true"	
+	}
+
+
+

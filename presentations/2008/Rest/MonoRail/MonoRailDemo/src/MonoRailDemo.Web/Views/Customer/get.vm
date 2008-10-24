@@ -1,0 +1,23 @@
+﻿<h1>Customer Details</h1>
+
+<table id="details">
+  <tr>
+    <td>
+      <span>Id</span>
+    </td>
+    <td>$customer.Id</td>
+  </tr>
+  <tr>
+    <td>
+      <span>First Name</span>
+    </td>
+    <td>$customer.FirstName</td>
+  </tr>
+  <tr>
+    <td>
+      <span>Last Name</span>
+    </td>
+    <td>$customer.LastName</td>
+  </tr>
+</table>
+    

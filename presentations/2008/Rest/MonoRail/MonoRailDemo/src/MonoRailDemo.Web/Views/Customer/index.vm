@@ -1,0 +1,7 @@
+﻿<h1>Customers</h1>
+
+<ul>
+#foreach($customer in $customers)
+  <li>#$customer.Id - $customer.FirstName $customer.LastName</li>    
+#end
+</ul>

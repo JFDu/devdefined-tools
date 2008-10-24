@@ -1,0 +1,18 @@
+POST
+
+Uri:
+
+http://localhost.:8080/api.svc/customers
+
+Request Headers:
+
+User-Agent: Fiddler
+Content-type: text/xml
+
+Request Body:
+
+<Customer xmlns="http://schemas.datacontract.org/2004/07/WcfRest.Services" 
+xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <Organisation>CustomerGamma</Organisation>
+</Customer>
+
