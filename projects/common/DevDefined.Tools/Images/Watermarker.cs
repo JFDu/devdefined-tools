@@ -117,8 +117,7 @@ namespace DevDefined.Tools.Images
                 case StringAlignment.Center:
                     return ((canvasSize/2) - (textSize/2)) + offset;
                 case StringAlignment.Far:
-                    return (canvasSize - textSize) - offset;
-                case StringAlignment.Near:
+                    return (canvasSize - textSize) - offset;                
                 default:
                     return offset;
             }
