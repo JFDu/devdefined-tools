@@ -22,6 +22,7 @@ http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
   * [OAuthSignatureValidation] - how to use the library to validate a signature.
   * [GoogleServicesWithCertificate] - how to use google services requiring a certificate.
   * [http://blog.bittercoder.com/PermaLink,guid,4f387bde-7ed6-480b-952b-bbc0ead9ebfb.aspx OpenSocial Signature Validation] - how to use the library to validate an [http://code.google.com/apis/opensocial/ OpenSocial] signed request.
+  * [OAuthWcfIntegration] - using this library with WCF.
 = Issues =
 
   * Cookie support for consumers incomplete.
