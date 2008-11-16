@@ -32,4 +32,3 @@ http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
 = Still to come =
 
   * MonoRail provider example.
-  * WCF channel provider example.
