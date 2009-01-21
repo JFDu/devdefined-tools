@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\shared-libs\Castle.MicroKernel.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\shared-libs\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -50,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtendedContainer\ExtendedComponentBuilder.cs" />
+    <Compile Include="ExtendedContainer\ExtendedConfigurationParametersInspector.cs" />
+    <Compile Include="ExtendedContainer\ExtendedWindsorContainer.cs" />
     <Compile Include="Dates\TimeSpanUtility.cs" />
     <Compile Include="DelegateDefinitions.cs" />
     <Compile Include="Dsl\AbstractNode.cs" />
@@ -94,6 +101,7 @@
     <Compile Include="BaseDictionary.cs" />
     <Compile Include="Compilation\Helpers.cs" />
     <Compile Include="Compilation\SwitchCompiler.cs" />
+    <Compile Include="Reflection\StaticReflectionHelper.cs" />
     <Compile Include="WeakRef\WeakDictionary.cs" />
     <Compile Include="WeakRef\WeakKeyComparer_T.cs" />
     <Compile Include="WeakRef\WeakKeyDictionary.cs" />
