@@ -42,6 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\shared-libs\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="LinFu.Core, Version=2.2.0.19938, Culture=neutral, PublicKeyToken=a4c63a184389506f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\shared-libs\LinFu.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -54,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisposableAction.cs" />
     <Compile Include="ExtendedContainer\ExtendedComponentBuilder.cs" />
     <Compile Include="ExtendedContainer\ExtendedConfigurationParametersInspector.cs" />
     <Compile Include="ExtendedContainer\ExtendedWindsorContainer.cs" />
@@ -93,6 +98,35 @@
     <Compile Include="LocalData\ILocalData.cs" />
     <Compile Include="LocalData\LocalData.cs" />
     <Compile Include="LocalData\PerLocalLifestyle.cs" />
+    <Compile Include="Observable\AbstractObservable.cs" />
+    <Compile Include="Observable\AbstractObservableDecorator.cs" />
+    <Compile Include="Observable\AbstractObserverDecorator.cs" />
+    <Compile Include="Observable\ActionObserver.cs" />
+    <Compile Include="Observable\AllObservable.cs" />
+    <Compile Include="Observable\AllObserver.cs" />
+    <Compile Include="Observable\ChangeObservable.cs" />
+    <Compile Include="Observable\ChangeObserver.cs" />
+    <Compile Include="Observable\ConcatObserver.cs" />
+    <Compile Include="Observable\EventObservable.cs" />
+    <Compile Include="Observable\IntegerExtensions.cs" />
+    <Compile Include="Observable\IObservable.cs" />
+    <Compile Include="Observable\IObserver.cs" />
+    <Compile Include="Observable\LastObservable.cs" />
+    <Compile Include="Observable\LastObserver.cs" />
+    <Compile Include="Observable\ObservableExtensions.cs" />
+    <Compile Include="Observable\ObservableSink.cs" />
+    <Compile Include="Observable\ObservableTimer.cs" />
+    <Compile Include="Observable\PeriodicObserveable.cs" />
+    <Compile Include="Observable\PredicateObservable.cs" />
+    <Compile Include="Observable\PredicateObserver.cs" />
+    <Compile Include="Observable\PeriodicObserver.cs" />
+    <Compile Include="Observable\SelectObservable.cs" />
+    <Compile Include="Observable\SelectObserver.cs" />
+    <Compile Include="Observable\SkipObservable.cs" />
+    <Compile Include="Observable\SkipObserver.cs" />
+    <Compile Include="Observable\TakeObservable.cs" />
+    <Compile Include="Observable\TakeObserver.cs" />
+    <Compile Include="Observable\TimerElapsed.cs" />
     <Compile Include="Pipeline\Filter.cs" />
     <Compile Include="Pipeline\GenericOperation.cs" />
     <Compile Include="Pipeline\IOperation.cs" />
