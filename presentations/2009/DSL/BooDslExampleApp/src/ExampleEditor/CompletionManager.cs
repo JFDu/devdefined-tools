@@ -34,23 +34,25 @@ namespace BooDslExampleApp
         return ModulesSuggestions();
       }
 
-      int temp;
-      if (name == "users_per_machine" || int.TryParse(name, out temp))
+      if (name == "users_per_machine")
       {
-        return NumbersSuggestions();
+        return NumbersSuggestions(50,100,150,200);
+      }
+      else if (name == "min_memory")
+      {
+          return NumbersSuggestions(1024,2048,4096,8*1024);
+      }
+      else if (name == "min_cpu_count")
+      {
+          return NumbersSuggestions(1, 2, 4, 8, 16);
       }
 
       return EmptySuggestion(textArea.Caret);
     }
 
-    CompletionData[] NumbersSuggestions()
+    CompletionData[] NumbersSuggestions(params int[] numbers)
     {
-      return new[]
-               {
-                 new CompletionData {Text = "50"},
-                 new CompletionData {Text = "100"},
-                 new CompletionData {Text = "150"}
-               };
+        return numbers.Select(number => new CompletionData { Text = number.ToString() }).ToArray();
     }
 
     CompletionData[] ModulesSuggestions()
@@ -71,7 +73,9 @@ namespace BooDslExampleApp
                {
                  new CompletionData {Text = "requires", DescriptionText = "Requires a particular module", AddSpaceAfterInsertion = true},
                  new CompletionData {Text = "same_machine_as", DescriptionText = "Needs to be on the same machine as the specified module", AddSpaceAfterInsertion = true},
-                 new CompletionData {Text = "users_per_machine", DescriptionText = "Can support the specified amount of users", AddSpaceAfterInsertion = true}
+                 new CompletionData {Text = "users_per_machine", DescriptionText = "Can support the specified amount of users", AddSpaceAfterInsertion = true},
+                 new CompletionData {Text = "min_cpu_count", DescriptionText = "Minimum number of cpus required", AddSpaceAfterInsertion = true},
+                     new CompletionData {Text = "min_memory", DescriptionText = "Minimum ammount of memory required", AddSpaceAfterInsertion = true}
                };
     }
   }

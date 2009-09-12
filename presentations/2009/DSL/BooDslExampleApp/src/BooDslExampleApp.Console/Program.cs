@@ -15,11 +15,13 @@ namespace BooDslExampleApp
 
       var info = new RequirementsInformation(200, "vacations");
 
-      List<SystemModule> modules = QuoteGenerator.Generate(url, info);
+      Console.WriteLine("Requesting quote for module \"vacations\" with 200 users\r\n");
+
+      List<SystemModule> modules = QuoteGenerator.Generate(url, info);     
 
       DisplayModuleRequirements(modules);
 
-      Console.WriteLine("Press enter to exit...");
+      Console.WriteLine("\r\nPress enter to exit...");
 
       Console.ReadLine();
     }
