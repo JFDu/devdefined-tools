@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="BooDslExampleApp.Program" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooDslExampleApp.QuoteGeneration.QuoteGenerationDslEngine" Collapsed="true">
+    <Position X="9.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>QuoteGeneration\QuoteGenerationDslEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooDslExampleApp.QuoteGeneration.QuoteGenerator" Collapsed="true">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>QuoteGeneration\QuoteGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooDslExampleApp.QuoteGeneration.RequirementsInformation">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>QuoteGeneration\RequirementsInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooDslExampleApp.QuoteGeneration.SystemModule" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAACIAQAABIEgAAAAAAAAAAQAAA=</HashCode>
+      <FileName>QuoteGeneration\SystemModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooDslExampleApp.QuoteGeneration.QuoteGeneratorRule">
+    <Position X="7.25" Y="2.5" Width="4" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAEIEBAAAAQAAAAAAgQSAAAAAIAAAAIAAAAAAAA=</HashCode>
+      <FileName>QuoteGeneration\QuoteGeneratorRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
