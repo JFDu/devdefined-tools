@@ -19,8 +19,8 @@ http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
 
 This library has been forked a few times, the forks can be found here:
 
-* http://github.com/XeroAPI
-* http://github.com/buildmaster/oauth-mvc.net/
+ * http://github.com/XeroAPI
+ * http://github.com/buildmaster/oauth-mvc.net/
 
 The XeroAPI is adding some great new features to the DevDefined OAuth library - well worth checking it out. 
 
