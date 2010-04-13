@@ -15,6 +15,15 @@ The code can be found here:
 
 http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
 
+= Forks =
+
+This library has been forked a few times, the forks can be found here:
+
+* http://github.com/XeroAPI
+* http://github.com/buildmaster/oauth-mvc.net/
+
+The XeroAPI is adding some great new features to the DevDefined OAuth library - well worth checking it out. 
+
 = Guides =
 
   * [OAuthConsumer] - implementing a consumer with the library.
@@ -23,12 +32,19 @@ http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
   * [GoogleServicesWithCertificate] - how to use google services requiring a certificate.
   * [http://blog.bittercoder.com/PermaLink,guid,4f387bde-7ed6-480b-952b-bbc0ead9ebfb.aspx OpenSocial Signature Validation] - how to use the library to validate an [http://code.google.com/apis/opensocial/ OpenSocial] signed request.
   * [OAuthWcfIntegration] - using this library with WCF.
-= Issues =
 
-  * Cookie support for consumers incomplete.
-  * OAuth Authorization header support in provider incomplete.
-  * Poor test coverage.
+= Blog entries referencing this library =
 
-= Still to come =
+ * http://www.leporelo.eu/blog.aspx?id=how-to-use-oauth-to-connect-to-twitter-in-powershell
+ * http://www.markerstudio.com/technical/2009/09/net-oauth-sample-working-with-justintv/
+ * http://bgeek.net/blog/2009/3/3/oauth-mvcnet-revisited.html
+ * http://weblogs.asp.net/cibrax/archive/2008/11/14/oauth-channel-for-wcf-restful-services.aspx
+ * http://oauth.net/code/
+ * http://blog.stevienova.com/2008/04/19/oauth-getting-started-with-oauth-in-c-net/
 
-  * MonoRail provider example.
+= TODO =
+
+Work with the mono team RE: getting OAuth support into Mono Olive.
+
+ * http://www.mono-project.com/WCF
+ * http://groups.google.com/group/mono-olive/browse_thread/thread/591628b267e3f015
