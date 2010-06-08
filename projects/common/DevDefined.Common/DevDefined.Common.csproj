@@ -136,6 +136,7 @@
     <Compile Include="Compilation\Helpers.cs" />
     <Compile Include="Compilation\SwitchCompiler.cs" />
     <Compile Include="Reflection\StaticReflectionHelper.cs" />
+    <Compile Include="Collections\RingBuffer.cs" />
     <Compile Include="WeakRef\WeakDictionary.cs" />
     <Compile Include="WeakRef\WeakKeyComparer_T.cs" />
     <Compile Include="WeakRef\WeakKeyDictionary.cs" />
