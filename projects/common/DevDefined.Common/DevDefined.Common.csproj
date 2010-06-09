@@ -46,11 +46,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\shared-libs\LinFu.Core.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\shared-libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -58,6 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appenders\BufferedInvoker.cs" />
+    <Compile Include="Appenders\ColoredItem.cs" />
+    <Compile Include="Appenders\ColoredRichTextBoxAppender.cs" />
+    <Compile Include="Appenders\TextBoxAppender.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="ExtendedContainer\ExtendedComponentBuilder.cs" />
     <Compile Include="ExtendedContainer\ExtendedConfigurationParametersInspector.cs" />
