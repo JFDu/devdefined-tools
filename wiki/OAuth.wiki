@@ -11,9 +11,13 @@ For more information on OAuth itself check out http://www.oauth.net/ and http://
 
 = Code =
 
-The code can be found here:
+*Update 4th August 2010*
 
-http://devdefined-tools.googlecode.com/svn/trunk/projects/oauth/
+The code has been moved to github, and can be found here now:
+
+http://github.com/bittercoder/DevDefined.OAuth
+
+All issues/patches should be logged there now, and no further commits will be made to the code on this googlecode project.
 
 = Forks =
 
